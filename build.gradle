@@ -20,7 +20,6 @@ repositories {
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
     // 在下方导包
-    implementation 'io.github.dreamvoid:MiraiMC-Integration:1.7'
 }
 
 def targetJavaVersion = 8

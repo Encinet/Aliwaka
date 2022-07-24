@@ -5,13 +5,10 @@ api-version: 1.16
 authors: [ ObcbO ]
 description: Mik automatic management robot
 website: https://github.com/Encinet/Aliwaka
-depend:
-  - MiraiMC
-#depend: [ MiraiMC ] 此为非必须依赖
+#此为非必须依赖
+#softdepend:
 commands:
   aliwaka:
     aliases:
       - alw
     description: MainCommand
-  qq:
-    description: Send Message To QQ
