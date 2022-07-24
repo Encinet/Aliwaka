@@ -1,0 +1,6 @@
+account:
+  bot: 1802732019
+  group: 1138627074
+format:
+  qq-to-server: '&e$[nick]&7: &f$[message]'
+  server-to-qq: '$[player]: $[message]'
