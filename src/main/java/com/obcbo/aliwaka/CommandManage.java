@@ -17,6 +17,8 @@ public class CommandManage implements CommandExecutor {
                 return gc.core(sender);
             case ("info"):
                 return info.core(sender);
+            case ("restart"):
+                return restart.core(sender);
             default:
                 sender.sendMessage(Aliwaka.prefix + "Ooops! 某只ObcbO还没写好帮助");
                 return true;

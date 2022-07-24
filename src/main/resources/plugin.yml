@@ -12,3 +12,7 @@ commands:
     aliases:
       - alw
     description: MainCommand
+permissions:
+  aliwaka.admin:
+    description: OnlyAdmin
+    default: op
