@@ -1,5 +1,6 @@
 package com.obcbo.aliwaka.task;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 
 public class Guard implements Runnable {
@@ -17,18 +18,18 @@ public class Guard implements Runnable {
     private void core() {
         int tps = (int) Bukkit.getTPS()[0];
         if (tps < dangerThresHold) {
-            value = value + 2;
+            value = value + 5;
         } else if (tps < normalThresHold) {
             value++;
-        } else if (tps > 0) {
+        } else if (value > 0) {
             value--;
         }
-        if (value >= 50) {
-            Bukkit.broadcastMessage("服务器开始强制回收内存,可能会有短暂卡顿");
+        if (value >= 25) {
+            Bukkit.broadcast(Component.text("服务器开始强制回收内存,可能会有短暂卡顿"));
             long before = System.currentTimeMillis();
             System.gc();
             long total = System.currentTimeMillis() - before;
-            Bukkit.broadcastMessage("服务器内存回收完成 耗时" + total + "ms");
+            Bukkit.broadcast(Component.text("服务器内存回收完成 耗时" + total + "ms"));
             if (value >= 50) {
                 value = value - 50;
             } else {
