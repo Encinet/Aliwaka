@@ -6,20 +6,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 public class gc {
-    static boolean cooling = false; // 是否在冷却状态
     static long cooltime = 0; // 冷却起始
     public static boolean core(CommandSender sender) {
-        if (!sender.hasPermission("aliwaka.admin") && cooling) {
+        if (!sender.hasPermission("aliwaka.admin") ) {
             long time = System.currentTimeMillis() - cooltime;
-            if (time >= 10000) {
-                cooling = false;
-                cooltime = 0;
+            if (time < 10000) {
+                sender.sendMessage(Aliwaka.prefix + "冷却中");
+                return true;
+            } else {
+                cooltime = System.currentTimeMillis();
             }
-            sender.sendMessage(Aliwaka.prefix + "冷却中");
-            return true;
-        } else if (!sender.hasPermission("aliwaka.admin") && !cooling) {
-            cooling = true;
-            cooltime = System.currentTimeMillis();
         }
         Bukkit.broadcast(Component.text("服务器开始强制回收内存,可能会有短暂卡顿"));
         sender.sendMessage(Aliwaka.prefix + "开始GC回收");

@@ -5,8 +5,7 @@ import org.bukkit.Bukkit;
 
 public class Guard implements Runnable {
     public static int value = 0;// 危险值
-    final int normalThresHold = 18;// 普通阈值
-    final int dangerThresHold = 13;// 危险阈值
+    final int thresHold = 18;// 处理阈值
 
     @Override
     public void run() {
@@ -17,14 +16,12 @@ public class Guard implements Runnable {
 
     private void core() {
         int tps = (int) Bukkit.getTPS()[0];
-        if (tps < dangerThresHold) {
-            value = value + 5;
-        } else if (tps < normalThresHold) {
-            value++;
-        } else if (value > 0) {
+        if (tps < thresHold) {
+            value = value + (20 - tps);
+        } else if (tps >= thresHold) {
             value--;
         }
-        if (value >= 25) {
+        if (value >= 20) {
             Bukkit.broadcast(Component.text("服务器开始强制回收内存,可能会有短暂卡顿"));
             long before = System.currentTimeMillis();
             System.gc();

@@ -10,7 +10,7 @@ website: https://github.com/Encinet/Aliwaka
 commands:
   aliwaka:
     aliases:
-      - alw
+      - aw
     description: MainCommand
 permissions:
   aliwaka.admin:
