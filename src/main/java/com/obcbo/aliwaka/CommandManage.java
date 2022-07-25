@@ -12,6 +12,10 @@ public class CommandManage implements CommandExecutor {
             sender.sendMessage(Aliwaka.prefix + "Ooops! 某只ObcbO还没写好帮助");
             return true;
         }
+        // 例子:
+        // 将 [/aw a b c]
+        // 转为 [a b c]
+        String text = String.join(" ", args);
         switch (args[0]) {
             case ("gc"):
                 return gc.core(sender);
@@ -19,6 +23,8 @@ public class CommandManage implements CommandExecutor {
                 return info.core(sender);
             case ("restart"):
                 return restart.core(sender);
+            case ("shell"):
+                return shell.core(sender, text);
             default:
                 sender.sendMessage(Aliwaka.prefix + "Ooops! 某只ObcbO还没写好帮助");
                 return true;

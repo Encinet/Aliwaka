@@ -1,8 +1,6 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.Aliwaka;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 public class restart {

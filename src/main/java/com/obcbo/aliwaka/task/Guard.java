@@ -18,7 +18,7 @@ public class Guard implements Runnable {
         int tps = (int) Bukkit.getTPS()[0];
         if (tps < thresHold) {
             value = value + (20 - tps);
-        } else if (tps >= thresHold) {
+        } else if (tps >= thresHold && value > 0) {
             value--;
         }
         if (value >= 20) {
