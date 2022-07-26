@@ -1,6 +1,6 @@
 package com.obcbo.aliwaka.command;
 
-import com.obcbo.aliwaka.Aliwaka;
+import com.obcbo.aliwaka.Config;
 import com.obcbo.aliwaka.task.Guard;
 import com.obcbo.aliwaka.until.OutputUtils;
 import org.bukkit.Bukkit;
@@ -14,9 +14,9 @@ import java.util.List;
 
 public class info {
     public static boolean core(CommandSender sender) {
-        sender.sendMessage(Aliwaka.prefix + "开始输出服务器信息");
+        sender.sendMessage(Config.prefix + "开始输出服务器信息");
         sender.sendMessage("§b服务器版本§7:§f 1.16.5 " + String.format("§b在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
-        sender.sendMessage("§b危险值§7:§f " + Guard.value);
+        sender.sendMessage("§b危险值§7:§f " + Guard.getwarn());
 
         long max = Runtime.getRuntime().maxMemory();
         long use = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();

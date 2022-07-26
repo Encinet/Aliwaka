@@ -1,6 +1,6 @@
 package com.obcbo.aliwaka.command;
 
-import com.obcbo.aliwaka.Aliwaka;
+import com.obcbo.aliwaka.Config;
 import com.obcbo.aliwaka.until.Permission;
 import org.bukkit.command.CommandSender;
 
@@ -11,18 +11,19 @@ public class shell implements Runnable {
     public static String text;
     public static CommandSender sender;
 
-    public static boolean core(CommandSender sender, String text) {
+    public static boolean core(CommandSender sender, String[] args) {
         if (Permission.check(sender)) {
+            String text = String.join(" ", args);
             if (text.length() < 7) {
-                sender.sendMessage(Aliwaka.prefix + "你似乎还没有输入命令");
+                sender.sendMessage(Config.prefix + "你似乎还没有输入命令");
                 return true;
             }
             shell.text = text.substring(6);
             shell.sender = sender;
-            sender.sendMessage(Aliwaka.prefix + "开始执行 " + shell.text);
+            sender.sendMessage(Config.prefix + "开始执行 " + shell.text);
             new Thread(new shell(), "Shell").start();
         } else {
-            sender.sendMessage(Aliwaka.prefix + "§c没有权限");
+            sender.sendMessage(Config.prefix + "§c没有权限");
         }
         return true;
     }
@@ -38,7 +39,7 @@ public class shell implements Runnable {
             }
             sender.sendMessage(b.toString());
         } catch (Exception e) {
-            sender.sendMessage(Aliwaka.prefix + "执行命令遇到问题");
+            sender.sendMessage(Config.prefix + "执行命令遇到问题");
             e.printStackTrace();
         }
     }
