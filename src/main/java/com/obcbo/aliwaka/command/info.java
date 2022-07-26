@@ -27,7 +27,8 @@ public class info {
         for (@NotNull double single : Bukkit.getTPS()) {
             tps.add(df.format(single));
         }
-        sender.sendMessage("§bTPS§7:§f " + tps);
+        double mspt = Double.parseDouble(df.format(Bukkit.getTickTimes()[0] / 1000000));
+        sender.sendMessage("§bTPS§7:§f " + tps + " §bMSPT§7:§f " + mspt);
 
         final int threadcount = Thread.currentThread().getThreadGroup().activeCount();
         sender.sendMessage("§b线程数§7:§f " + threadcount);

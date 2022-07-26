@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class Guard implements Runnable {
@@ -40,12 +42,18 @@ public class Guard implements Runnable {
 
     private void core() {
         tpscheck();
+        msptcheck();
         memcheck();
         try {
             Thread.sleep(10000);// 休眠10秒
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void msptcheck() {
+        DecimalFormat df = new DecimalFormat("#.00");// 保留小数点后两位
+        double mspt = Double.parseDouble(df.format(Bukkit.getTickTimes()[0] / 1000000));
     }
 
     private void memcheck() {
@@ -84,7 +92,7 @@ public class Guard implements Runnable {
         Bukkit.broadcast(Component.text("服务器内存回收完成 耗时" + total + "ms"));
     }
     private void chunk() {
-        Chunk[] chunk = Bukkit.getWorld("world").getLoadedChunks();
+        Chunk[] chunk = Objects.requireNonNull(Bukkit.getWorld("world")).getLoadedChunks();
         for (Chunk i: chunk) {
             i.unload();
         }
