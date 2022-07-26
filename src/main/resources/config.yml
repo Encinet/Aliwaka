@@ -1,6 +1,14 @@
-version: 1.0
+version: 1
 prefix: "§8[§6Ali§ewaka§8]§r "
 placeholders:
   date-format: "yyyy.MM.dd"
   time-format: "h:mm a"
   time-zone: "Etc/GMT-8"
+guard:
+  mem-check:
+    percentage: 90
+  tps-check:
+    warn-threshold: 18
+    danger-threshold: 3
+  mspt-check:
+    danger-threshold: 80

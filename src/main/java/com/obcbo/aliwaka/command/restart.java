@@ -13,6 +13,7 @@ import java.util.Objects;
 
 public class restart {
     static ZoneId timezone = ZoneId.of(Objects.requireNonNull(Config.getConfig().getString("placeholders.time-zone")));
+
     public static boolean core(CommandSender sender, String[] args) {
         if (!Permission.check(sender)) {
             sender.sendMessage(Config.prefix + "§c没有权限");

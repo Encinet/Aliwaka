@@ -16,15 +16,15 @@ public class info {
     public static boolean core(CommandSender sender) {
         sender.sendMessage(Config.prefix + "开始输出服务器信息");
         sender.sendMessage("§b服务器版本§7:§f 1.16.5 " + String.format("§b在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
-        sender.sendMessage("§b危险值§7:§f " + Guard.getwarn());
+        sender.sendMessage("§b危险值§7:§f " + Guard.getWarn());
 
         long max = Runtime.getRuntime().maxMemory();
         long use = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        sender.sendMessage("§b内存§7:§f " + String.format("%.2f%%", use / (double) max * 100) + " (" + OutputUtils.tanByte(max) + "§7-§f" + OutputUtils.tanByte(use) + "§7=§f" + OutputUtils.tanByte(max - use) + " 分配§7:§f" + OutputUtils.tanByte(Runtime.getRuntime().totalMemory()) +")");
+        sender.sendMessage("§b内存§7:§f " + String.format("%.2f%%", use / (double) max * 100) + " (" + OutputUtils.tanByte(max) + "§7-§f" + OutputUtils.tanByte(use) + "§7=§f" + OutputUtils.tanByte(max - use) + " 分配§7:§f" + OutputUtils.tanByte(Runtime.getRuntime().totalMemory()) + ")");
 
         DecimalFormat df = new DecimalFormat("#.00");// 保留小数点后两位
-        List<String> tps =new ArrayList<>(4);// tps值有4个
-        for (@NotNull double single : Bukkit.getTPS()) {
+        List<String> tps = new ArrayList<>(4);// tps值有4个
+        for (double single : Bukkit.getTPS()) {
             tps.add(df.format(single));
         }
         double mspt = Double.parseDouble(df.format(Bukkit.getTickTimes()[0] / 1000000));

