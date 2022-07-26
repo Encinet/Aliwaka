@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 enum TabList {
-    FIRST(Arrays.asList("gc", "info", "restart", "shell", "guard", "reload"), 0, null, new int[]{1}),
+    FIRST(Arrays.asList("gc", "guard", "help", "info", "reload", "restart", "shell"), 0, null, new int[]{1}),
     RESTART(Arrays.asList("countdown", "now", "time", "timing"), 1, "restart", new int[]{2}),
     GUARD(Arrays.asList("start", "stop"), 1, "guard", new int[]{2}),
     ;
