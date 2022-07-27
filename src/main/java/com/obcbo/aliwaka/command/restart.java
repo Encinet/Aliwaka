@@ -1,7 +1,6 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.Config;
-import com.obcbo.aliwaka.until.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
@@ -11,11 +10,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import static com.obcbo.aliwaka.Config.timeZone;
+
 public class restart {
-    static ZoneId timezone = ZoneId.of(Objects.requireNonNull(Config.getConfig().getString("placeholders.time-zone")));
+    static ZoneId timezone = ZoneId.of(timeZone);
 
     public static boolean core(CommandSender sender, String[] args) {
-        if (!Permission.check(sender)) {
+        if (!sender.hasPermission("aliwaka.admin")) {
             sender.sendMessage(Config.prefix + "§c没有权限");
             return true;
         }

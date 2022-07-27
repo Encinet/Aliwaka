@@ -4,6 +4,10 @@ placeholders:
   date-format: "yyyy.MM.dd"
   time-format: "h:mm a"
   time-zone: "Etc/GMT-8"
+color:
+  normal: '§a'
+  warn: '§6'
+  danger: '§c'
 guard:
   mem-check:
     percentage: 90

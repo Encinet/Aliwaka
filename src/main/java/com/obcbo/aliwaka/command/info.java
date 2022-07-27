@@ -6,11 +6,12 @@ import com.obcbo.aliwaka.until.OutputUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.obcbo.aliwaka.Config.*;
 
 public class info {
     public static boolean core(CommandSender sender) {
@@ -25,9 +26,29 @@ public class info {
         DecimalFormat df = new DecimalFormat("#.00");// 保留小数点后两位
         List<String> tps = new ArrayList<>(4);// tps值有4个
         for (double single : Bukkit.getTPS()) {
-            tps.add(df.format(single));
+            StringBuilder stps = new StringBuilder();
+            double dtps = Double.parseDouble(df.format(single));
+            if (dtps < tpsDangerThreshold) {
+                stps.append(colorDanger);
+            } else if (dtps < tpsWarnThreshold) {
+                stps.append(colorWarn);
+            } else if (dtps >= tpsWarnThreshold) {
+                stps.append(colorNormal);
+            }
+            stps.append(df.format(single));
+            stps.append("§f");
+            tps.add(String.valueOf(stps));
         }
-        double mspt = Double.parseDouble(df.format(Bukkit.getTickTimes()[0] / 1000000));
+        double dmspt = Double.parseDouble(df.format(Bukkit.getTickTimes()[0] / 1000000));
+        StringBuilder mspt = new StringBuilder();
+        if (dmspt > msptDangerThreshold) {
+            mspt.append(colorDanger);
+        } else if (dmspt < msptDangerThreshold && dmspt > 50) {
+            mspt.append(colorWarn);
+        } else if (dmspt <= 50) {
+            mspt.append(colorNormal);
+        }
+        mspt.append(dmspt);
         sender.sendMessage("§bTPS§7:§f " + tps + " §bMSPT§7:§f " + mspt);
 
         final int threadcount = Thread.currentThread().getThreadGroup().activeCount();

@@ -1,7 +1,6 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.Config;
-import com.obcbo.aliwaka.until.Permission;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -9,7 +8,7 @@ import org.bukkit.command.CommandSender;
 public class gc {
     static long cooltime = 0; // 冷却起始
     public static boolean core(CommandSender sender) {
-        if (!Permission.check(sender) ) {
+        if (!sender.hasPermission("aliwaka.admin")) {
             long time = System.currentTimeMillis() - cooltime;
             if (time < 10000) {
                 sender.sendMessage(Config.prefix + "冷却中");

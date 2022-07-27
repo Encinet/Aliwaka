@@ -1,7 +1,6 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.Config;
-import com.obcbo.aliwaka.until.Permission;
 import org.bukkit.command.CommandSender;
 
 import java.io.BufferedReader;
@@ -12,7 +11,7 @@ public class shell implements Runnable {
     public static CommandSender sender;
 
     public static boolean core(CommandSender sender, String[] args) {
-        if (Permission.check(sender)) {
+        if (sender.hasPermission("aliwaka.admin")) {
             String text = String.join(" ", args);
             if (text.length() < 7) {
                 sender.sendMessage(Config.prefix + "你似乎还没有输入命令");

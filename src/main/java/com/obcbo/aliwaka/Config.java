@@ -12,6 +12,9 @@ public class Config {
     public static String dateFormat;
     public static String timeFormat;
     public static String timeZone;
+    public static String colorNormal;
+    public static String colorWarn;
+    public static String colorDanger;
     public static int memPercentage;
     public static int tpsWarnThreshold;
     public static int tpsDangerThreshold;
@@ -27,6 +30,9 @@ public class Config {
         dateFormat = getConfig().getString("placeholders.dateFormat");
         timeFormat = getConfig().getString("placeholders.timeFormat");
         timeZone = getConfig().getString("placeholders.timeZone");
+        colorNormal = getConfig().getString("color.normal");
+        colorWarn = getConfig().getString("color.warn");
+        colorDanger = getConfig().getString("color.danger");
         memPercentage = getConfig().getInt("guard.mem-check.percentage");
         tpsWarnThreshold = getConfig().getInt("guard.tps-check.warn-threshold");
         tpsDangerThreshold = getConfig().getInt("guard.tps-check.danger-threshold");
