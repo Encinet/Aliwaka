@@ -11,11 +11,16 @@ import java.util.Objects;
 import static com.obcbo.aliwaka.Config.*;
 
 public class Guard implements Runnable {
+    private static final Thread guard = new Thread(new Guard(), "Aliwaka-Guard");
     private static boolean on = true;
     private static int warn = 0;// 危险值
 
     public static void start() {
-        new Thread(new Guard(), "GuardThread").start();
+        if (guard.isAlive()){
+            Aliwaka.logger.warning("Guard已开启");
+            return;
+        }
+        guard.start();
     }
 
     public static void stop() {

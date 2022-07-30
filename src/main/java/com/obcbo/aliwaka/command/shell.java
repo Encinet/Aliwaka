@@ -20,7 +20,7 @@ public class shell implements Runnable {
             shell.text = text.substring(6);
             shell.sender = sender;
             sender.sendMessage(Config.prefix + "开始执行 " + shell.text);
-            new Thread(new shell(), "Shell").start();
+            new Thread(new shell(), "Aliwaka-Shell").start();
         } else {
             sender.sendMessage(Config.prefix + "§c没有权限");
         }

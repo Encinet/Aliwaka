@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import static com.obcbo.aliwaka.Config.*;
 public class info {
     public static boolean core(CommandSender sender) {
         sender.sendMessage(Config.prefix + "开始输出服务器信息");
-        sender.sendMessage("§b服务器版本§7:§f 1.16.5 " + String.format("§b在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
+        sender.sendMessage(String.format("§b在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
         sender.sendMessage("§b危险值§7:§f " + Guard.getWarn());
 
         long max = Runtime.getRuntime().maxMemory();
