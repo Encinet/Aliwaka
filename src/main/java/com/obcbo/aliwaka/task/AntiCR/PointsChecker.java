@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.obcbo.aliwaka.Config.crCheckInterval;
 import static com.obcbo.aliwaka.task.AntiCR.AntiCR.playerPoints;
 
 public class PointsChecker implements Runnable {
@@ -31,9 +32,9 @@ public class PointsChecker implements Runnable {
         while (on) {
             try {
                 check();
-                del();
+                reduce();
                 try {
-                    Thread.sleep(10000);// 休眠10秒
+                    Thread.sleep(crCheckInterval);// 休眠10秒
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -44,13 +45,13 @@ public class PointsChecker implements Runnable {
         Aliwaka.logger.warning("PointsChecker线程关闭");
     }
 
-    private static void del() {
+    private static void reduce() {
         for (Map.Entry<String, Integer> entry : playerPoints.entrySet()) {
             // key entry.getKey() ; value entry.getValue()
-            if (entry.getValue() >= 5000) {
-                playerPoints.put(entry.getKey(), 4000);
-            } else if (entry.getValue() >= 40) {
-                playerPoints.put(entry.getKey(), entry.getValue() - 40);
+            if (entry.getValue() >= 4000) {
+                playerPoints.put(entry.getKey(), 3800);
+            } else if (entry.getValue() >= 30) {
+                playerPoints.put(entry.getKey(), entry.getValue() - 30);
             } else if (entry.getValue() >= 10)  {
                 playerPoints.put(entry.getKey(), entry.getValue() - 10);
             }

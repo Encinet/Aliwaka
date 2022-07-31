@@ -12,6 +12,8 @@ public class Config {
     public static String colorNormal;
     public static String colorWarn;
     public static String colorDanger;
+    public static int crCheckInterval;
+    public static int guardCheckInterval;
     public static int memPercentage;
     public static int tpsWarnThreshold;
     public static int tpsDangerThreshold;
@@ -27,9 +29,12 @@ public class Config {
         colorNormal = getConfig().getString("color.normal");
         colorWarn = getConfig().getString("color.warn");
         colorDanger = getConfig().getString("color.danger");
-        memPercentage = getConfig().getInt("guard.mem-check.percentage");
-        tpsWarnThreshold = getConfig().getInt("guard.tps-check.warn-threshold");
-        tpsDangerThreshold = getConfig().getInt("guard.tps-check.danger-threshold");
-        msptDangerThreshold = getConfig().getInt("guard.mspt-check.danger-threshold");
+
+        crCheckInterval = getConfig().getInt("AntiCR.check-interval");
+        guardCheckInterval = getConfig().getInt("Guard.check-interval");
+        memPercentage = getConfig().getInt("Guard.mem-check.percentage");
+        tpsWarnThreshold = getConfig().getInt("Guard.tps-check.warn-threshold");
+        tpsDangerThreshold = getConfig().getInt("Guard.tps-check.danger-threshold");
+        msptDangerThreshold = getConfig().getInt("Guard.mspt-check.danger-threshold");
     }
 }

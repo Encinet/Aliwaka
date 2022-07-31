@@ -1,14 +1,32 @@
 version: 1
+# 消息前缀
 prefix: "§8[§6Ali§ewaka§8]§r "
+# 显示颜色
 color:
   normal: '§a'
   warn: '§6'
   danger: '§c'
-guard:
+
+# 跑图检测
+AntiCR:
+  # 检测间隔 单位ms
+  check-interval: 10000
+
+# 卡顿检测
+Guard:
+  # 检测间隔 单位ms
+  check-interval: 10000
+  # 内存检测
   mem-check:
+    # 占用百分比 当达到设置值及以上时 执行GC
     percentage: 90
+  # TPS检测
   tps-check:
+    # 执行值 当TPS低于此值时 开始计算危险值
     warn-threshold: 18
+    # 危险值 低于设置值时 立刻执行GC和区块回收
     danger-threshold: 3
+  # MSPT检测
   mspt-check:
+    # MSPT数值 当达到设置值及以上时 执行GC
     danger-threshold: 80

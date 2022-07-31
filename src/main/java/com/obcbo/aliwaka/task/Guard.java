@@ -49,7 +49,7 @@ public class Guard implements Runnable {
         tpscheck();
         msptcheck();
         try {
-            Thread.sleep(10000);// 休眠10秒
+            Thread.sleep(guardCheckInterval);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
