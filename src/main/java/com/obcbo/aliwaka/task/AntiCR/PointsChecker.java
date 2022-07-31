@@ -4,6 +4,7 @@ import com.obcbo.aliwaka.Aliwaka;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static com.obcbo.aliwaka.task.AntiCR.AntiCR.playerPoints;
@@ -29,8 +30,8 @@ public class PointsChecker implements Runnable {
         Aliwaka.logger.info("PointsChecker开始执行任务");
         while (on) {
             try {
-                del();
                 check();
+                del();
                 try {
                     Thread.sleep(10000);// 休眠10秒
                 } catch (InterruptedException e) {
@@ -44,13 +45,26 @@ public class PointsChecker implements Runnable {
     }
 
     private static void del() {
-
+        for (Map.Entry<String, Integer> entry : playerPoints.entrySet()) {
+            // key entry.getKey() ; value entry.getValue()
+            if (entry.getValue() >= 5000) {
+                playerPoints.put(entry.getKey(), 4000);
+            } else if (entry.getValue() >= 40) {
+                playerPoints.put(entry.getKey(), entry.getValue() - 40);
+            } else if (entry.getValue() >= 10)  {
+                playerPoints.put(entry.getKey(), entry.getValue() - 10);
+            }
+        }
     }
 
     private static void check() {
         for (Player a : Bukkit.getOnlinePlayers()) {
-            if (playerPoints.get(a.getName()) > 1000) {
-                Objects.requireNonNull(a.getPlayer()).sendTitle("§6旅行者 停下来休息一会吧", "跑图卡顿真的很严重", 10, 70, 20);
+            if (playerPoints.containsKey(a.getName())) {
+                if (playerPoints.get(a.getName()) > 5000) {
+                    Objects.requireNonNull(a.getPlayer()).sendTitle("§6旅行者 停下来休息一会吧", "跑图卡顿真的很严重", 10, 70, 20);
+                }
+            } else {
+                playerPoints.put(a.getName(), 1);
             }
         }
     }

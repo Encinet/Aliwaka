@@ -1,9 +1,5 @@
 version: 1
 prefix: "§8[§6Ali§ewaka§8]§r "
-placeholders:
-  date-format: "yyyy.MM.dd"
-  time-format: "h:mm a"
-  time-zone: "Etc/GMT-8"
 color:
   normal: '§a'
   warn: '§6'

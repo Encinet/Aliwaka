@@ -6,12 +6,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 public class Config {
-    static Plugin config = JavaPlugin.getProvidingPlugin(Aliwaka.class);
+    static final Plugin config = JavaPlugin.getProvidingPlugin(Aliwaka.class);
     public static int version;
     public static String prefix;
-    public static String dateFormat;
-    public static String timeFormat;
-    public static String timeZone;
     public static String colorNormal;
     public static String colorWarn;
     public static String colorDanger;
@@ -27,9 +24,6 @@ public class Config {
     public static void load() {
         version = getConfig().getInt("version");
         prefix = getConfig().getString("prefix");
-        dateFormat = getConfig().getString("placeholders.dateFormat");
-        timeFormat = getConfig().getString("placeholders.timeFormat");
-        timeZone = getConfig().getString("placeholders.timeZone");
         colorNormal = getConfig().getString("color.normal");
         colorWarn = getConfig().getString("color.warn");
         colorDanger = getConfig().getString("color.danger");

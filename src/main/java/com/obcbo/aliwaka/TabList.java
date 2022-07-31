@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 enum TabList {
-    FIRST(Arrays.asList("gc", "function", "help", "info", "reload", "restart", "shell"), 0, null, new int[]{1}),
-    RESTART(Arrays.asList("countdown", "now", "time", "timing"), 1, "restart", new int[]{2}),
-    FUNCTION(Arrays.asList("guard", "None"), 1, "function", new int[]{2}),
+    FIRST(Arrays.asList("gc", "function", "help", "info", "reload", "shell"), 0, null, new int[]{1}),
+    FUNCTION(Arrays.asList("guard", "AntiCR"), 1, "function", new int[]{2}),
     GUARD(Arrays.asList("start", "stop"), 2, "guard", new int[]{3}),
+    ANTICR(Arrays.asList("start", "stop", "list"), 2, "AntiCR", new int[]{3}),
     ;
 
     private final List<String> list;//返回的List
