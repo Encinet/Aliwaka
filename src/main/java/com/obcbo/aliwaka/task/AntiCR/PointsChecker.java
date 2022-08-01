@@ -1,17 +1,17 @@
 package com.obcbo.aliwaka.task.AntiCR;
 
 import com.obcbo.aliwaka.Aliwaka;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-
-import java.util.Map;
-import java.util.Objects;
+import com.obcbo.aliwaka.Config;
+import org.bukkit.*;
+import org.bukkit.entity.*;
+import java.util.*;
 
 import static com.obcbo.aliwaka.Config.crCheckInterval;
 import static com.obcbo.aliwaka.task.AntiCR.AntiCR.playerPoints;
 
 public class PointsChecker implements Runnable {
     private static boolean on = true;
+    static Set<Player> controlList = new HashSet<>();
     private static final Thread PointsChecker = new Thread(new PointsChecker(), "Aliwaka-PointsChecker");
 
     public static void start() {
@@ -33,6 +33,7 @@ public class PointsChecker implements Runnable {
             try {
                 check();
                 reduce();
+                speedControl();
                 try {
                     Thread.sleep(crCheckInterval);// 休眠10秒
                 } catch (InterruptedException e) {
@@ -45,27 +46,46 @@ public class PointsChecker implements Runnable {
         Aliwaka.logger.warning("PointsChecker线程关闭");
     }
 
-    private static void reduce() {
+    private void speedControl() {
+        for (Player player : controlList) {
+            controlList.remove(player);
+            player.setWalkSpeed((float) 0.1);
+            player.setFlySpeed((float) 0.05);
+            new Thread(() -> {
+                try {
+                    Thread.sleep(10000);// 休眠10秒
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                player.setWalkSpeed((float) 0.2);
+                player.setFlySpeed((float) 0.1);
+                player.sendMessage(Config.prefix + "恢复速度");
+            }).start();
+        }
+    }
+
+    private void reduce() {
         for (Map.Entry<String, Integer> entry : playerPoints.entrySet()) {
             // key entry.getKey() ; value entry.getValue()
-            if (entry.getValue() >= 4000) {
-                playerPoints.put(entry.getKey(), 3800);
-            } else if (entry.getValue() >= 30) {
-                playerPoints.put(entry.getKey(), entry.getValue() - 30);
-            } else if (entry.getValue() >= 10)  {
+            if (entry.getValue() >= 2000) {
+                playerPoints.put(entry.getKey(), 1500);
+            } else if (entry.getValue() >= 100) {
+                playerPoints.put(entry.getKey(), entry.getValue() - 100);
+            } else if (entry.getValue() >= 10) {
                 playerPoints.put(entry.getKey(), entry.getValue() - 10);
             }
         }
     }
 
-    private static void check() {
+    private void check() {
         for (Player a : Bukkit.getOnlinePlayers()) {
             if (playerPoints.containsKey(a.getName())) {
-                if (playerPoints.get(a.getName()) > 5000) {
+                if (playerPoints.get(a.getName()) > 2000) {
                     Objects.requireNonNull(a.getPlayer()).sendTitle("§6旅行者 停下来休息一会吧", "跑图卡顿真的很严重", 10, 70, 20);
+                    controlList.add(a);
                 }
             } else {
-                playerPoints.put(a.getName(), 1);
+                playerPoints.put(a.getName(), 0);
             }
         }
     }

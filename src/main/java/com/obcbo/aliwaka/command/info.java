@@ -16,7 +16,8 @@ import static com.obcbo.aliwaka.Config.*;
 public class info {
     public static boolean core(CommandSender sender) {
         sender.sendMessage(Config.prefix + "开始输出服务器信息");
-        sender.sendMessage(String.format("§6在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
+
+        sender.sendMessage("§6服务器版本§7:§f " + Bukkit.getVersion() + String.format(" §6在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
         sender.sendMessage("§6危险值§7:§f " + Guard.getWarn());
 
         long max = Runtime.getRuntime().maxMemory();

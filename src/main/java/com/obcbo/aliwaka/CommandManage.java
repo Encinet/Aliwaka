@@ -15,11 +15,12 @@ public class CommandManage implements TabExecutor {
         if (args.length < 1 || "help".equals(args[0])) {
             sender.sendMessage("§f----- §6Ali§ewaka 帮助 §f-----");
             sender.sendMessage("§6/aw §7gc §f- 回收内存");
-            sender.sendMessage("§6/aw §7function <name> §e<start|stop> §f- 开启禁用守护线程");
+            sender.sendMessage("§6/aw §7function <name> §e<start|stop> §f- 开启禁用功能");
             sender.sendMessage("§6/aw §7help §f- 查看帮助");
             sender.sendMessage("§6/aw §7info §f- 输出服务器信息");
             sender.sendMessage("§6/aw §7reload §f- 重载插件");
             sender.sendMessage("§6/aw §7shell §e<command> §f- 模拟终端执行命令");
+            sender.sendMessage("§f----- §eBy §6ObcbO §f-----");
             return true;
         }
         switch (args[0]) {
