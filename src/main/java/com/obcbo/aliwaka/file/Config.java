@@ -1,5 +1,6 @@
-package com.obcbo.aliwaka;
+package com.obcbo.aliwaka.file;
 
+import com.obcbo.aliwaka.Aliwaka;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -8,10 +9,6 @@ import org.jetbrains.annotations.NotNull;
 public class Config {
     static final Plugin config = JavaPlugin.getProvidingPlugin(Aliwaka.class);
     public static int version;
-    public static String prefix;
-    public static String colorNormal;
-    public static String colorWarn;
-    public static String colorDanger;
     public static int crCheckInterval;
     public static int crSpeedInterval;
     public static float crSpeedNormalWalk;
@@ -38,10 +35,6 @@ public class Config {
 
     public static void load() {
         version = getConfig().getInt("version", 1);
-        prefix = getConfig().getString("prefix", "§8[§6Ali§ewaka§8]§r ");
-        colorNormal = getConfig().getString("color.normal", "§a");
-        colorWarn = getConfig().getString("color.warn", "§6");
-        colorDanger = getConfig().getString("color.danger", "§c");
 
         crCheckInterval = getConfig().getInt("AntiCR.check-interval", 10000);
         crSpeedInterval = getConfig().getInt("AntiCR.speed.interval", 10000);

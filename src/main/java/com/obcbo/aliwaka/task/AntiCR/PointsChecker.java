@@ -1,7 +1,8 @@
 package com.obcbo.aliwaka.task.AntiCR;
 
 import com.obcbo.aliwaka.Aliwaka;
-import com.obcbo.aliwaka.Config;
+import com.obcbo.aliwaka.file.Config;
+import com.obcbo.aliwaka.file.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -10,7 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.obcbo.aliwaka.Config.*;
+import static com.obcbo.aliwaka.file.Config.*;
 import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 
 public class PointsChecker implements Runnable {
@@ -53,7 +54,7 @@ public class PointsChecker implements Runnable {
 
     private void speedControl() {
         for (Player player : controlList) {
-            player.sendMessage(Config.prefix + "暂时限制速度");
+            player.sendMessage(Message.prefix + "暂时限制速度");
             controlList.remove(player);
             player.setWalkSpeed(crSpeedLimitWalk);
             player.setFlySpeed(crSpeedLimitFly);
@@ -65,7 +66,7 @@ public class PointsChecker implements Runnable {
                 }
                 player.setWalkSpeed(crSpeedNormalWalk);
                 player.setFlySpeed(crSpeedNormalFly);
-                player.sendMessage(Config.prefix + "恢复速度");
+                player.sendMessage(Message.prefix + "恢复速度");
             }).start();
         }
     }

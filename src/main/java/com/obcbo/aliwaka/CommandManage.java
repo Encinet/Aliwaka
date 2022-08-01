@@ -1,6 +1,8 @@
 package com.obcbo.aliwaka;
 
 import com.obcbo.aliwaka.command.*;
+import com.obcbo.aliwaka.file.Config;
+import com.obcbo.aliwaka.file.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -9,18 +11,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.obcbo.aliwaka.file.Message.help;
+
 public class CommandManage implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (args.length < 1 || "help".equals(args[0])) {
-            sender.sendMessage("§f----- §6Ali§ewaka 帮助 §f-----");
-            sender.sendMessage("§6/aw §7gc §f- 回收内存");
-            sender.sendMessage("§6/aw §7function <name> §e<start|stop> §f- 任务命令");
-            sender.sendMessage("§6/aw §7help §f- 查看帮助");
-            sender.sendMessage("§6/aw §7info §f- 输出服务器信息");
-            sender.sendMessage("§6/aw §7reload §f- 重载插件");
-            sender.sendMessage("§6/aw §7shell §e<command> §f- 模拟终端执行命令");
-            sender.sendMessage("§f----- §eBy §6ObcbO §f-----");
+            for (String now : help) {
+                sender.sendMessage(now);
+            }
             return true;
         }
         switch (args[0]) {
@@ -36,7 +35,7 @@ public class CommandManage implements TabExecutor {
                 Aliwaka.reload();
                 return true;
             default:
-                sender.sendMessage(Config.prefix + "错误的命令语法");
+                sender.sendMessage(Message.prefix + "错误的命令语法");
                 return true;
         }
     }

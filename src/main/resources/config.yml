@@ -1,11 +1,4 @@
 version: 1
-# 消息前缀
-prefix: "§8[§6Ali§ewaka§8]§r "
-# 显示颜色
-color:
-  normal: "§a"
-  warn: "§6"
-  danger: "§c"
 
 # 跑图检测
 AntiCR:

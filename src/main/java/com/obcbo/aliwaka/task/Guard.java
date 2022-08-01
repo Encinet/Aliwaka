@@ -8,7 +8,7 @@ import org.bukkit.Chunk;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
-import static com.obcbo.aliwaka.Config.*;
+import static com.obcbo.aliwaka.file.Config.*;
 
 public class Guard implements Runnable {
     private static final Thread guard = new Thread(new Guard(), "Aliwaka-Guard");

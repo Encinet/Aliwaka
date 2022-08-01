@@ -1,6 +1,6 @@
 package com.obcbo.aliwaka.command;
 
-import com.obcbo.aliwaka.Config;
+import com.obcbo.aliwaka.file.Message;
 import com.obcbo.aliwaka.task.Guard;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -9,11 +9,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.obcbo.aliwaka.Config.*;
+import static com.obcbo.aliwaka.file.Config.*;
+import static com.obcbo.aliwaka.file.Message.*;
 
 public class info {
     public static boolean core(CommandSender sender) {
-        sender.sendMessage(Config.prefix + "开始输出服务器信息");
+        sender.sendMessage(Message.prefix + "开始输出服务器信息");
 
         sender.sendMessage("§6服务器版本§7:§f " + Bukkit.getVersion() + String.format(" §6在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
         sender.sendMessage("§6危险值§7:§f " + Guard.getWarn());

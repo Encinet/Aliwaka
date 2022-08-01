@@ -1,0 +1,19 @@
+# 消息前缀
+prefix: "&8[&6Ali&ewaka&8]&r "
+# 显示颜色
+color:
+  normal: "&a"
+  warn: "&6"
+  danger: "&c"
+# 帮助内容
+help:
+  - "&f----- &6Ali&ewaka 帮助 &f-----"
+  - "&6/aw &7gc &f- 回收内存"
+  - "&6/aw &7function <name> &e<start|stop> &f- 任务命令"
+  - "&6/aw &7help &f- 查看帮助"
+  - "&6/aw &7info &f- 输出服务器信息"
+  - "&6/aw &7reload &f- 重载插件"
+  - "&6/aw &7shell &e<command> &f- 模拟终端执行命令"
+  - "&f----- &eBy &6ObcbO &f-----"
+# 无权限
+no-permission: "&c没有权限"

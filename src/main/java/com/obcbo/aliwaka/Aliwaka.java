@@ -1,5 +1,7 @@
 package com.obcbo.aliwaka;
 
+import com.obcbo.aliwaka.file.Config;
+import com.obcbo.aliwaka.file.Message;
 import com.obcbo.aliwaka.task.AntiCR.CountChunk;
 import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
 import com.obcbo.aliwaka.task.Guard;
@@ -18,8 +20,10 @@ public final class Aliwaka extends JavaPlugin {
         Metrics metrics = new Metrics(this, 15979);// bstats统计
         logger.info("MAIN > 开始加载");
         saveDefaultConfig();
+        saveResource("message.yml", false);// false为不覆盖 true为每次调用都覆盖
         reloadConfig();
         Config.load();
+        Message.load();
 
         Bukkit.getPluginManager().registerEvents(new CountChunk(), this);
         logger.info("LISTENER > 监听器注册完毕");
@@ -46,6 +50,7 @@ public final class Aliwaka extends JavaPlugin {
         PointsChecker.stop();
         Guard.stop();
         Config.load();
+        Message.load();
         PointsChecker.start();
         Guard.start();
         logger.info("重载完成");
