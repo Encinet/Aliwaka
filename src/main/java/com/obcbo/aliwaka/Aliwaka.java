@@ -3,6 +3,7 @@ package com.obcbo.aliwaka;
 import com.obcbo.aliwaka.task.AntiCR.CountChunk;
 import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
 import com.obcbo.aliwaka.task.Guard;
+import com.obcbo.aliwaka.until.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +15,7 @@ public final class Aliwaka extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Metrics metrics = new Metrics(this, 15979);// bstats统计
         logger.info("MAIN > 开始加载");
         saveDefaultConfig();
         reloadConfig();
