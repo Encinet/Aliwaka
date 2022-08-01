@@ -2,9 +2,7 @@ package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.Config;
 import com.obcbo.aliwaka.task.Guard;
-import com.obcbo.aliwaka.until.OutputUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 
 import java.text.DecimalFormat;
@@ -22,7 +20,7 @@ public class info {
 
         long max = Runtime.getRuntime().maxMemory();
         long use = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        sender.sendMessage("§6内存§7:§f " + String.format("%.2f%%", use / (double) max * 100) + " (" + OutputUtils.tanByte(max) + "§7-§f" + OutputUtils.tanByte(use) + "§7=§f" + OutputUtils.tanByte(max - use) + " 分配§7:§f" + OutputUtils.tanByte(Runtime.getRuntime().totalMemory()) + ")");
+        sender.sendMessage("§6内存§7:§f " + String.format("%.2f%%", use / (double) max * 100) + " (" + unitByte(max) + "§7-§f" + unitByte(use) + "§7=§f" + unitByte(max - use) + " 分配§7:§f" + unitByte(Runtime.getRuntime().totalMemory()) + ")");
 
         DecimalFormat df = new DecimalFormat("#.00");// 保留小数点后两位
         List<String> tps = new ArrayList<>(4);// tps值有4个
@@ -52,14 +50,30 @@ public class info {
         mspt.append(dmspt);
         sender.sendMessage("§6TPS§7:§f " + tps + " §6MSPT§7:§f " + mspt);
 
-        final int threadcount = Thread.currentThread().getThreadGroup().activeCount();
-        sender.sendMessage("§6线程数§7:§f " + threadcount);
+        sender.sendMessage("§6线程数§7:§f " + Thread.currentThread().getThreadGroup().activeCount());
 
-        Server ser = Bukkit.getServer();
-        final long dt = ser.getWorldContainer().getTotalSpace();
-        final long du = ser.getWorldContainer().getUsableSpace();
+        final long dt = Bukkit.getServer().getWorldContainer().getTotalSpace();
+        final long du = Bukkit.getServer().getWorldContainer().getUsableSpace();
         final long duse = dt - du;
-        sender.sendMessage("§6磁盘§7:§f " + OutputUtils.tanByte(dt) + "§7-§f" + OutputUtils.tanByte(duse) + "§7=§f" + OutputUtils.tanByte(du));
+        sender.sendMessage("§6磁盘§7:§f " + unitByte(dt) + "§7-§f" + unitByte(duse) + "§7=§f" + unitByte(du));
         return true;
+    }
+
+    public static String unitByte(long enter) {
+        if (enter < 0) return "NaN";
+        final double standard = 1024D;
+        final DecimalFormat df = new DecimalFormat("#.00");
+        if (enter <= standard) {
+            return df.format(enter) + "B";
+        }
+        final double m = standard * standard;
+        if (enter <= m) {
+            return df.format(enter / standard) + "KB";
+        }
+        final double g = m * standard;
+        if (enter <= g) {
+            return df.format(enter / m) + "MB";
+        }
+        return df.format(enter / g) + "GB";
     }
 }
