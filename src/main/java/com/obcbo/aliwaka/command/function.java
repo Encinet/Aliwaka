@@ -7,12 +7,15 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Map;
 
-import static com.obcbo.aliwaka.task.AntiCR.AntiCR.playerPoints;
+import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 
 public class function {
     public static boolean core(CommandSender sender, String[] args) {
         if (!sender.hasPermission("aliwaka.admin")) {
             sender.sendMessage(Config.prefix + "§c没有权限");
+            return true;
+        } else if (args.length < 3) {
+            sender.sendMessage(Config.prefix + "§c你似乎还没有输入完");
             return true;
         }
         switch (args[1]) {

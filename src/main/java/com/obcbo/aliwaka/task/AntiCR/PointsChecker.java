@@ -2,16 +2,20 @@ package com.obcbo.aliwaka.task.AntiCR;
 
 import com.obcbo.aliwaka.Aliwaka;
 import com.obcbo.aliwaka.Config;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import java.util.*;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
-import static com.obcbo.aliwaka.Config.crCheckInterval;
-import static com.obcbo.aliwaka.task.AntiCR.AntiCR.playerPoints;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import static com.obcbo.aliwaka.Config.*;
+import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 
 public class PointsChecker implements Runnable {
     private static boolean on = true;
-    static Set<Player> controlList = new HashSet<>();
+    static final Set<Player> controlList = new HashSet<>();
     private static final Thread PointsChecker = new Thread(new PointsChecker(), "Aliwaka-PointsChecker");
 
     public static void start() {
@@ -26,6 +30,7 @@ public class PointsChecker implements Runnable {
         on = false;
     }
 
+    @SuppressWarnings("BusyWait")
     @Override
     public void run() {
         Aliwaka.logger.info("PointsChecker开始执行任务");
@@ -48,17 +53,18 @@ public class PointsChecker implements Runnable {
 
     private void speedControl() {
         for (Player player : controlList) {
+            player.sendMessage(Config.prefix + "暂时限制速度");
             controlList.remove(player);
-            player.setWalkSpeed((float) 0.1);
-            player.setFlySpeed((float) 0.05);
+            player.setWalkSpeed(crSpeedLimitWalk);
+            player.setFlySpeed(crSpeedLimitFly);
             new Thread(() -> {
                 try {
-                    Thread.sleep(10000);// 休眠10秒
+                    Thread.sleep(crSpeedInterval);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                player.setWalkSpeed((float) 0.2);
-                player.setFlySpeed((float) 0.1);
+                player.setWalkSpeed(crSpeedNormalWalk);
+                player.setFlySpeed(crSpeedNormalFly);
                 player.sendMessage(Config.prefix + "恢复速度");
             }).start();
         }
@@ -67,12 +73,12 @@ public class PointsChecker implements Runnable {
     private void reduce() {
         for (Map.Entry<String, Integer> entry : playerPoints.entrySet()) {
             // key entry.getKey() ; value entry.getValue()
-            if (entry.getValue() >= 2000) {
-                playerPoints.put(entry.getKey(), 1500);
-            } else if (entry.getValue() >= 100) {
-                playerPoints.put(entry.getKey(), entry.getValue() - 100);
-            } else if (entry.getValue() >= 10) {
-                playerPoints.put(entry.getKey(), entry.getValue() - 10);
+            if (entry.getValue() >= crImplement) {
+                playerPoints.put(entry.getKey(), crAfterImplement);
+            } else if (entry.getValue() >= crFirstCondition) {
+                playerPoints.put(entry.getKey(), entry.getValue() - crFirstReduce);
+            } else if (entry.getValue() >= crSecondCondition) {
+                playerPoints.put(entry.getKey(), entry.getValue() - crSecondReduce);
             }
         }
     }
@@ -80,7 +86,7 @@ public class PointsChecker implements Runnable {
     private void check() {
         for (Player a : Bukkit.getOnlinePlayers()) {
             if (playerPoints.containsKey(a.getName())) {
-                if (playerPoints.get(a.getName()) > 2000) {
+                if (playerPoints.get(a.getName()) > crImplement) {
                     Objects.requireNonNull(a.getPlayer()).sendTitle("§6旅行者 停下来休息一会吧", "跑图卡顿真的很严重", 10, 70, 20);
                     controlList.add(a);
                 }

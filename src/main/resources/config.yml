@@ -3,14 +3,39 @@ version: 1
 prefix: "§8[§6Ali§ewaka§8]§r "
 # 显示颜色
 color:
-  normal: '§a'
-  warn: '§6'
-  danger: '§c'
+  normal: "§a"
+  warn: "§6"
+  danger: "§c"
 
 # 跑图检测
 AntiCR:
   # 检测间隔 单位ms
   check-interval: 10000
+  # 速度限制
+  speed:
+    # 限制时间 单位ms
+    interval: 10000
+    # 正常情况下的速度
+    normal:
+      walk: 0.2
+      fly: 0.1
+    # 限制情况下的速度
+    limit:
+      walk: 0.1
+      fly: 0.05
+  num:
+    # 执行值
+    implement: 2500
+    # 执行后减少到
+    after-implement: 2000
+    # 第一次判断 大于等于数值时
+    first-condition: 100
+    # 第一次判断返回为true就减少设置数值
+    first-reduce: 100
+    # 第二次判断 大于等于数值时
+    second-condition: 10
+    # 第二次判断返回为true就减少设置数值
+    second-reduce: 10
 
 # 卡顿检测
 Guard:

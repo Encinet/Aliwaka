@@ -1,6 +1,6 @@
 package com.obcbo.aliwaka;
 
-import com.obcbo.aliwaka.task.AntiCR.AntiCR;
+import com.obcbo.aliwaka.task.AntiCR.CountChunk;
 import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
 import com.obcbo.aliwaka.task.Guard;
 import org.bukkit.Bukkit;
@@ -19,7 +19,7 @@ public final class Aliwaka extends JavaPlugin {
         reloadConfig();
         Config.load();
 
-        Bukkit.getPluginManager().registerEvents(new AntiCR(), this);
+        Bukkit.getPluginManager().registerEvents(new CountChunk(), this);
         logger.info("LISTENER > 监听器注册完毕");
 
         if (Bukkit.getPluginCommand("aliwaka") != null) {
