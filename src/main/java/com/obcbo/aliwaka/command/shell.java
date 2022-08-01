@@ -7,6 +7,8 @@ import org.bukkit.command.CommandSender;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import static com.obcbo.aliwaka.file.Message.noPermission;
+
 public class shell implements Runnable {
     public static String text;
     public static CommandSender sender;
@@ -23,7 +25,7 @@ public class shell implements Runnable {
             sender.sendMessage(Message.prefix + "开始执行 " + shell.text);
             new Thread(new shell(), "Aliwaka-Shell").start();
         } else {
-            sender.sendMessage(Message.prefix + "§c没有权限");
+            sender.sendMessage(Message.prefix + noPermission);
         }
         return true;
     }

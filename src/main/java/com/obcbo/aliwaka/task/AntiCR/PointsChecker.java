@@ -1,7 +1,6 @@
 package com.obcbo.aliwaka.task.AntiCR;
 
 import com.obcbo.aliwaka.Aliwaka;
-import com.obcbo.aliwaka.file.Config;
 import com.obcbo.aliwaka.file.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import static com.obcbo.aliwaka.file.Config.*;
+import static com.obcbo.aliwaka.file.Message.*;
 import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 
 public class PointsChecker implements Runnable {
@@ -54,7 +54,7 @@ public class PointsChecker implements Runnable {
 
     private void speedControl() {
         for (Player player : controlList) {
-            player.sendMessage(Message.prefix + "暂时限制速度");
+            player.sendMessage(Message.prefix + crLimit);
             controlList.remove(player);
             player.setWalkSpeed(crSpeedLimitWalk);
             player.setFlySpeed(crSpeedLimitFly);
@@ -66,7 +66,7 @@ public class PointsChecker implements Runnable {
                 }
                 player.setWalkSpeed(crSpeedNormalWalk);
                 player.setFlySpeed(crSpeedNormalFly);
-                player.sendMessage(Message.prefix + "恢复速度");
+                player.sendMessage(Message.prefix + crLimitLifted);
             }).start();
         }
     }
@@ -88,7 +88,7 @@ public class PointsChecker implements Runnable {
         for (Player a : Bukkit.getOnlinePlayers()) {
             if (playerPoints.containsKey(a.getName())) {
                 if (playerPoints.get(a.getName()) > crImplement) {
-                    Objects.requireNonNull(a.getPlayer()).sendTitle("§6旅行者 停下来休息一会吧", "跑图卡顿真的很严重", 10, 70, 20);
+                    Objects.requireNonNull(a.getPlayer()).sendTitle(crTitle, crSubtitle, 10, 70, 20);
                     controlList.add(a);
                 }
             } else {

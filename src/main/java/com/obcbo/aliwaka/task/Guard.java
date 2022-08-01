@@ -9,6 +9,8 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 import static com.obcbo.aliwaka.file.Config.*;
+import static com.obcbo.aliwaka.file.Message.gcEnd;
+import static com.obcbo.aliwaka.file.Message.gcStart;
 
 public class Guard implements Runnable {
     private static final Thread guard = new Thread(new Guard(), "Aliwaka-Guard");
@@ -16,7 +18,7 @@ public class Guard implements Runnable {
     private static int warn = 0;// 危险值
 
     public static void start() {
-        if (guard.isAlive()){
+        if (guard.isAlive()) {
             Aliwaka.logger.warning("Guard已开启");
             return;
         }
@@ -92,11 +94,11 @@ public class Guard implements Runnable {
     }
 
     private void gc() {
-        Bukkit.broadcast(Component.text("服务器开始强制回收内存,可能会有短暂卡顿"));
+        Bukkit.broadcast(Component.text(gcStart));
         long before = System.currentTimeMillis();
         System.gc();
         long total = System.currentTimeMillis() - before;
-        Bukkit.broadcast(Component.text("服务器内存回收完成 耗时" + total + "ms"));
+        Bukkit.broadcast(Component.text(gcEnd.replace("%time%", Long.toString(total))));
     }
 
     private void chunk() {

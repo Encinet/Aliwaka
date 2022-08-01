@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.obcbo.aliwaka.file.Message.noPermission;
 import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 
 public class function {
     public static boolean core(CommandSender sender, String[] args) {
         if (!sender.hasPermission("aliwaka.admin")) {
-            sender.sendMessage(Message.prefix + "§c没有权限");
+            sender.sendMessage(Message.prefix + noPermission);
             return true;
         } else if (args.length < 3) {
             sender.sendMessage(Message.prefix + "你似乎还没有输入完");
