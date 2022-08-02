@@ -25,6 +25,7 @@ public class Message {
     public static String CD;
     public static String notComplete;
     public static String wrongCommand;
+    public static String functionDisable;
     public static String gcStart;
     public static String gcEnd;
     public static String crOutput;
@@ -36,7 +37,7 @@ public class Message {
     public static String shellError;
 
     public static void load() {
-        if (!(message.getInt("version") == 1)) {
+        if (!(message.getInt("version") == 2)) {
             logger.warning("消息文件message.yml是旧版");
         }
         prefix = get("prefix", "&8[&6Ali&ewaka&8]&r ");
@@ -48,6 +49,7 @@ public class Message {
         CD = get("CD", "冷却中");
         notComplete = get("not-complete", "你似乎还没有输入完命令");
         wrongCommand = get("wrong-command", "错误的命令");
+        functionDisable = get("function-disable", "此功能处于关闭状态");
         gcStart = get("GC.start", "服务器开始强制回收内存,可能会有短暂卡顿");
         gcEnd = get("GC.end", "服务器内存回收完成 耗时%time%ms");
         crLimit = get("AntiCR.limit", "暂时限制速度");

@@ -18,11 +18,13 @@ public class CountChunk implements Listener {
 
     @EventHandler
     public void playerChunkLoadEvent(PlayerChunkLoadEvent event) {
+        if (!crEnable) return;// 获取功能是否开启
         add(event.getPlayer().getName());
     }
 
     @EventHandler
     public void playerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
+        if (!crEnable) return;
         for (String n : crListenCommand) {
             if (event.getMessage().startsWith("/" + n)) {
                 int set = playerPoints.get(event.getPlayer().getName()) >= crCommandImplement ?
@@ -34,6 +36,7 @@ public class CountChunk implements Listener {
 
     @EventHandler
     public void playerJoinEvent(PlayerJoinEvent event) {
+        if (!crEnable) return;
         // 防止玩家退出无法恢复到正常速度
         if (!playerPoints.containsKey(event.getPlayer().getName())) {
             event.getPlayer().setWalkSpeed(crSpeedNormalWalk);
@@ -43,11 +46,13 @@ public class CountChunk implements Listener {
 
     @EventHandler
     public void playerQuitEvent(PlayerQuitEvent event) {
+        if (!crEnable) return;
         // 玩家退出时删除记录
         playerPoints.remove(event.getPlayer().getName());
     }
 
     private void add(String player) {
+        if (!crEnable) return;
         if (playerPoints.containsKey(player)) {
             int now = playerPoints.get(player) + 1;
             playerPoints.put(player, now);

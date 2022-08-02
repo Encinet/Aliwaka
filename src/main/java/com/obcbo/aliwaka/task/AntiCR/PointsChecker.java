@@ -17,7 +17,7 @@ import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 public class PointsChecker implements Runnable {
     private static boolean on = true;
     static final Set<Player> controlList = new HashSet<>();
-    private static final Thread PointsChecker = new Thread(new PointsChecker(), "Aliwaka-PointsChecker");
+    public static final Thread PointsChecker = new Thread(new PointsChecker(), "Aliwaka-PointsChecker");
 
     public static void start() {
         if (PointsChecker.isAlive()) {

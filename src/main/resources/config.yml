@@ -1,9 +1,11 @@
-#  配置文件版本 非必要不要更改
+# 配置文件版本 非必要不要更改
 version: 3
 # 普通玩家命令CD时间 目前仅用于GC指令 单位ms
 CD: 10000
 # 跑图检测
 AntiCR:
+  # 功能开关 true为开
+  enable: true
   # 检测间隔 单位ms
   check-interval: 10000
   # 命令开头为设置值 就减少设置值
@@ -33,6 +35,7 @@ AntiCR:
     implement: 1500
     # 执行后减少到
     after-implement: 1000
+    # 后面这四个数值 设置为0代表禁用
     # 第一次判断 大于等于数值时
     first-condition: 100
     # 第一次判断返回为true就减少设置数值
@@ -43,19 +46,23 @@ AntiCR:
     second-reduce: 10
 # 卡顿检测
 Guard:
+  enable: true
   # 检测间隔 单位ms
   check-interval: 10000
   # 内存检测
   mem-check:
+    enable: true
     # 占用百分比 当达到设置值及以上时 执行GC
     percentage: 90
   # TPS检测
   tps-check:
+    enable: true
     # 执行值 当TPS低于此值时 开始计算危险值
     warn-threshold: 18
     # 危险值 低于设置值时 立刻执行GC和区块回收
     danger-threshold: 3
   # MSPT检测
   mspt-check:
+    enable: true
     # MSPT数值 当达到设置值及以上时 执行GC
     danger-threshold: 80

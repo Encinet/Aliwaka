@@ -13,7 +13,7 @@ import static com.obcbo.aliwaka.file.Message.gcEnd;
 import static com.obcbo.aliwaka.file.Message.gcStart;
 
 public class Guard implements Runnable {
-    private static final Thread guard = new Thread(new Guard(), "Aliwaka-Guard");
+    public static final Thread guard = new Thread(new Guard(), "Aliwaka-Guard");
     private static boolean on = true;
     private static int warn = 0;// 危险值
 
@@ -47,9 +47,15 @@ public class Guard implements Runnable {
     }
 
     private void core() {
-        memcheck();
-        tpscheck();
-        msptcheck();
+        if (memEnable) {
+            memcheck();
+        }
+        if (tpsEnable) {
+            tpscheck();
+        }
+        if (msptEnable) {
+            msptcheck();
+        }
         try {
             Thread.sleep(guardCheckInterval);
         } catch (InterruptedException e) {

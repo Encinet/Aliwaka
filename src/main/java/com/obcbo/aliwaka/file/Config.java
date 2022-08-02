@@ -1,13 +1,11 @@
 package com.obcbo.aliwaka.file;
 
 import com.obcbo.aliwaka.Aliwaka;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.obcbo.aliwaka.Aliwaka.logger;
@@ -15,6 +13,7 @@ import static com.obcbo.aliwaka.Aliwaka.logger;
 public class Config {
     static final Plugin config = JavaPlugin.getProvidingPlugin(Aliwaka.class);
     public static int CD;
+    public static boolean crEnable;
     public static int crCheckInterval;
     public static int crSpeedInterval;
     public static float crSpeedNormalWalk;
@@ -32,10 +31,14 @@ public class Config {
     public static int crSecondCondition;
     public static int crSecondReduce;
 
+    public static boolean guardEnable;
     public static int guardCheckInterval;
+    public static boolean memEnable;
     public static int memPercentage;
+    public static boolean tpsEnable;
     public static int tpsWarnThreshold;
     public static int tpsDangerThreshold;
+    public static boolean msptEnable;
     public static int msptDangerThreshold;
 
     public static @NotNull FileConfiguration getConfig() {
@@ -48,6 +51,7 @@ public class Config {
         }
 
         CD = getConfig().getInt("CD", 10000);
+        crEnable = getConfig().getBoolean("AntiCR.enable", true);
         crCheckInterval = getConfig().getInt("AntiCR.check-interval", 10000);
         crListenCommand = getConfig().getStringList("AntiCR.listen-command.text");
         crCommandImplement = getConfig().getInt("AntiCR.listen-command.implement", 200);
@@ -63,10 +67,14 @@ public class Config {
         crSecondCondition = getConfig().getInt("AntiCR.num.second-condition", 10);
         crSecondReduce = getConfig().getInt("AntiCR.num.second-reduce", 10);
 
+        guardEnable = getConfig().getBoolean("Guard.enable", true);
         guardCheckInterval = getConfig().getInt("Guard.check-interval", 10000);
+        memEnable = getConfig().getBoolean("Guard.mem-check.enable", true);
         memPercentage = getConfig().getInt("Guard.mem-check.percentage", 90);
+        tpsEnable = getConfig().getBoolean("Guard.tps-check.enable", true);
         tpsWarnThreshold = getConfig().getInt("Guard.tps-check.warn-threshold", 18);
         tpsDangerThreshold = getConfig().getInt("Guard.tps-check.danger-threshold", 3);
+        msptEnable = getConfig().getBoolean("Guard.mspt-check.enable", true);
         msptDangerThreshold = getConfig().getInt("Guard.mspt-check.danger-threshold", 80);
     }
 }

@@ -1,6 +1,7 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.file.Message;
+import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
 import com.obcbo.aliwaka.task.Guard;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -16,13 +17,16 @@ public class info {
     public static boolean core(CommandSender sender) {
         sender.sendMessage(Message.prefix + "开始输出服务器信息");
 
-        sender.sendMessage("§6服务器版本§7:§f " + Bukkit.getVersion() + String.format(" §6在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
-        sender.sendMessage("§6危险值§7:§f " + Guard.getWarn());
+        sender.sendMessage("§6服务器版本§7:§f " + Bukkit.getVersion() +
+                String.format(" §6在线玩家§7:§f §f%d/%d", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
+        sender.sendMessage("§6危险值§7:§f " + Guard.getWarn() +
+                " §f(§6Guard§7:§f " + (Guard.guard.isAlive() ? "§a运行中" : "§c已关闭") +
+                " §6AntiCR§7:§f " + (PointsChecker.PointsChecker.isAlive() ? "§a运行中" : "§c已关闭") + "§f)");
 
         long max = Runtime.getRuntime().maxMemory();
         long use = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         sender.sendMessage("§6内存§7:§f " + String.format("%.2f%%", use / (double) max * 100) + " (" + unitByte(max) + "§7-§f" + unitByte(use) + "§7=§f" + unitByte(max - use) + " 分配§7:§f" + unitByte(Runtime.getRuntime().totalMemory()) + ")");
-        
+
         DecimalFormat df = new DecimalFormat("#.00");// 保留小数点后两位
         List<String> tps = new ArrayList<>(4);// tps值有4个
         for (double single : Bukkit.getTPS()) {

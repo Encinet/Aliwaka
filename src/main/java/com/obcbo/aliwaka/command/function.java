@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.obcbo.aliwaka.file.Config.crEnable;
 import static com.obcbo.aliwaka.file.Message.*;
 import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 
@@ -37,6 +38,11 @@ public class function {
                 } else if ("stop".equals(args[2])) {
                     PointsChecker.stop();
                 } else if ("list".equals(args[2])) {
+                    if (!crEnable) {// 功能关闭时执行
+                        sender.sendMessage(Message.prefix + functionDisable);
+                        return true;
+                    }
+
                     sender.sendMessage(Message.prefix + crOutput);
 
                     List<Map.Entry<String, Integer>> list = new ArrayList<>(playerPoints.entrySet()); //转换为list
