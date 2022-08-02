@@ -10,6 +10,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.obcbo.aliwaka.Aliwaka.logger;
+
 public class Message {
     static FileConfiguration message = YamlConfiguration.loadConfiguration(
             new File(JavaPlugin.getProvidingPlugin(Aliwaka.class).getDataFolder(), "message.yml"));
@@ -34,7 +36,9 @@ public class Message {
     public static String shellError;
 
     public static void load() {
-        // ChatColor.translateAlternateColorCodes('&',消息内容)
+        if (!(message.getInt("version") == 1)) {
+            logger.warning("消息文件message.yml是旧版");
+        }
         prefix = get("prefix", "&8[&6Ali&ewaka&8]&r ");
         colorNormal = get("color.normal", "&a");
         colorWarn = get("color.warn", "&6");

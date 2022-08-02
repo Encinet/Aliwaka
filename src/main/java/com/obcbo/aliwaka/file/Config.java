@@ -6,9 +6,10 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import static com.obcbo.aliwaka.Aliwaka.logger;
+
 public class Config {
     static final Plugin config = JavaPlugin.getProvidingPlugin(Aliwaka.class);
-    public static int version;
     public static int crCheckInterval;
     public static int crSpeedInterval;
     public static float crSpeedNormalWalk;
@@ -34,7 +35,9 @@ public class Config {
     }
 
     public static void load() {
-        version = getConfig().getInt("version", 1);
+        if (!(getConfig().getInt("version") == 2)) {
+            logger.warning("配置文件config.yml是旧版");
+        }
 
         crCheckInterval = getConfig().getInt("AntiCR.check-interval", 10000);
         crSpeedInterval = getConfig().getInt("AntiCR.speed.interval", 10000);
