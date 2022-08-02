@@ -7,14 +7,14 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.obcbo.aliwaka.file.Config.*;
 
 // Anti Candles Running
 public class CountChunk implements Listener {
-    public static final Map<String, Integer> playerPoints = new HashMap<>();
+    public static volatile Map<String, Integer> playerPoints = new ConcurrentHashMap<>();// 线程安全
 
     @EventHandler
     public void playerChunkLoadEvent(PlayerChunkLoadEvent event) {

@@ -1,6 +1,7 @@
 #  配置文件版本 非必要不要更改
 version: 3
-
+# 普通玩家命令CD时间 目前仅用于GC指令 单位ms
+CD: 10000
 # 跑图检测
 AntiCR:
   # 检测间隔 单位ms
@@ -40,7 +41,6 @@ AntiCR:
     second-condition: 10
     # 第二次判断返回为true就减少设置数值
     second-reduce: 10
-
 # 卡顿检测
 Guard:
   # 检测间隔 单位ms

@@ -22,7 +22,7 @@ public class info {
         long max = Runtime.getRuntime().maxMemory();
         long use = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         sender.sendMessage("§6内存§7:§f " + String.format("%.2f%%", use / (double) max * 100) + " (" + unitByte(max) + "§7-§f" + unitByte(use) + "§7=§f" + unitByte(max - use) + " 分配§7:§f" + unitByte(Runtime.getRuntime().totalMemory()) + ")");
-
+        
         DecimalFormat df = new DecimalFormat("#.00");// 保留小数点后两位
         List<String> tps = new ArrayList<>(4);// tps值有4个
         for (double single : Bukkit.getTPS()) {

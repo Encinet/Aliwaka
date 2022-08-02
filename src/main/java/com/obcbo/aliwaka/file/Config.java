@@ -14,6 +14,7 @@ import static com.obcbo.aliwaka.Aliwaka.logger;
 
 public class Config {
     static final Plugin config = JavaPlugin.getProvidingPlugin(Aliwaka.class);
+    public static int CD;
     public static int crCheckInterval;
     public static int crSpeedInterval;
     public static float crSpeedNormalWalk;
@@ -46,6 +47,7 @@ public class Config {
             logger.warning("配置文件config.yml是旧版");
         }
 
+        CD = getConfig().getInt("CD", 10000);
         crCheckInterval = getConfig().getInt("AntiCR.check-interval", 10000);
         crListenCommand = getConfig().getStringList("AntiCR.listen-command.text");
         crCommandImplement = getConfig().getInt("AntiCR.listen-command.implement", 200);

@@ -1,5 +1,6 @@
 package com.obcbo.aliwaka.command;
 
+import com.obcbo.aliwaka.file.Config;
 import com.obcbo.aliwaka.file.Message;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -13,7 +14,7 @@ public class gc {
     public static boolean core(CommandSender sender) {
         if (!sender.hasPermission("aliwaka.admin")) {
             long time = System.currentTimeMillis() - cooltime;
-            if (time < 10000) {
+            if (time < Config.CD) {
                 sender.sendMessage(Message.prefix + CD);
                 return true;
             } else {
