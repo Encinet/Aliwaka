@@ -1,0 +1,18 @@
+name: Aliwaka
+version: '${version}'
+main: com.obcbo.aliwaka.Aliwaka
+api-version: 1.16
+authors: [ ObcbO ]
+description: Mik automatic management robot
+website: https://github.com/Encinet/Aliwaka
+#此为非必须依赖
+#softdepend:
+commands:
+  aliwaka:
+    aliases:
+      - aw
+    description: MainCommand
+permissions:
+  aliwaka.admin:
+    description: OnlyAdmin
+    default: op

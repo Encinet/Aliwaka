@@ -19,10 +19,6 @@ help:
 no-permission: "&c没有权限"
 # 命令执行冷却
 CD: "冷却中"
-# 命令执行不完整
-not-complete: "你似乎还没有输入完命令"
-# 错误的命令
-wrong-command: "错误的命令"
 # 垃圾回收
 GC:
   start: "服务器开始强制回收内存,可能会有短暂卡顿"
@@ -30,7 +26,6 @@ GC:
   end: "服务器内存回收完成 耗时%time%ms"
 # 限制跑图
 AntiCR:
-  output: "输出区块加载计数中(仅在线)"
   limit: "暂时限制速度"
   limit-lifted: "恢复速度"
   title: "&6旅行者 停下来休息一会吧"

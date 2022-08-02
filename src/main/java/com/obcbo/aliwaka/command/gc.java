@@ -1,6 +1,5 @@
 package com.obcbo.aliwaka.command;
 
-import com.obcbo.aliwaka.file.Config;
 import com.obcbo.aliwaka.file.Message;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
