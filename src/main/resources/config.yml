@@ -1,10 +1,20 @@
 #  配置文件版本 非必要不要更改
-version: 2
+version: 3
 
 # 跑图检测
 AntiCR:
   # 检测间隔 单位ms
   check-interval: 10000
+  # 命令开头为设置值 就减少设置值
+  listen-command:
+    text:
+      - "tp"
+      - "mv tp"
+      - "rtp"
+      - "back"
+      - "warp"
+      - "home"
+    implement: 200
   # 速度限制
   speed:
     # 限制时间 单位ms
@@ -19,9 +29,9 @@ AntiCR:
       fly: 0.05
   num:
     # 执行值
-    implement: 2500
+    implement: 1500
     # 执行后减少到
-    after-implement: 2000
+    after-implement: 1000
     # 第一次判断 大于等于数值时
     first-condition: 100
     # 第一次判断返回为true就减少设置数值

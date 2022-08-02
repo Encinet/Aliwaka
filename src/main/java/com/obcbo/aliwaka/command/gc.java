@@ -9,6 +9,7 @@ import static com.obcbo.aliwaka.file.Message.*;
 
 public class gc {
     static long cooltime = 0; // 冷却起始
+
     public static boolean core(CommandSender sender) {
         if (!sender.hasPermission("aliwaka.admin")) {
             long time = System.currentTimeMillis() - cooltime;

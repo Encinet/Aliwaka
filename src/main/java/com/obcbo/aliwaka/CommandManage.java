@@ -1,6 +1,9 @@
 package com.obcbo.aliwaka;
 
-import com.obcbo.aliwaka.command.*;
+import com.obcbo.aliwaka.command.function;
+import com.obcbo.aliwaka.command.gc;
+import com.obcbo.aliwaka.command.info;
+import com.obcbo.aliwaka.command.shell;
 import com.obcbo.aliwaka.file.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
