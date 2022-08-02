@@ -11,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static com.obcbo.aliwaka.file.Message.help;
+import static com.obcbo.aliwaka.file.Message.wrongCommand;
 
 public class CommandManage implements TabExecutor {
     @Override
@@ -34,7 +35,7 @@ public class CommandManage implements TabExecutor {
                 Aliwaka.reload();
                 return true;
             default:
-                sender.sendMessage(Message.prefix + "错误的命令语法");
+                sender.sendMessage(Message.prefix + wrongCommand);
                 return true;
         }
     }
