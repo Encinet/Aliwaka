@@ -17,24 +17,29 @@ import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
 public class PointsChecker implements Runnable {
     private static boolean on = true;
     static final Set<Player> controlList = new HashSet<>();
-    public static final Thread PointsChecker = new Thread(new PointsChecker(), "Aliwaka-PointsChecker");
+    public static Thread PointsChecker = new Thread(new PointsChecker(), "Aliwaka-PointsChecker");
 
     public static void start() {
         if (PointsChecker.isAlive()) {
-            Aliwaka.logger.warning("PointsChecker已开启");
+            Aliwaka.logger.warning("PointsChecker is already turned on");
             return;
         }
+        PointsChecker = new Thread(new PointsChecker(), "Aliwaka-PointsChecker");
+        on = true;
         PointsChecker.start();
     }
 
     public static void stop() {
         on = false;
+        if (PointsChecker.isAlive()) {
+            PointsChecker.interrupt();
+        }
     }
 
     @SuppressWarnings("BusyWait")
     @Override
     public void run() {
-        Aliwaka.logger.info("PointsChecker开始执行任务");
+        Aliwaka.logger.info("PointsChecker starts to perform tasks");
         while (on) {
             try {
                 check();
@@ -43,19 +48,19 @@ public class PointsChecker implements Runnable {
                 try {
                     Thread.sleep(crCheckInterval);// 休眠10秒
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    Aliwaka.logger.warning("PointsChecker OFF");
                 }
             } catch (NullPointerException e) {
                 throw new RuntimeException(e);
             }
         }
-        Aliwaka.logger.warning("PointsChecker线程关闭");
+        Aliwaka.logger.warning("PointsChecker OFF");
     }
 
     private void speedControl() {
         for (Player player : controlList) {
-            player.sendMessage(Message.prefix + crLimit);
             controlList.remove(player);
+            player.sendMessage(Message.prefix + crLimit);
             player.setWalkSpeed(crSpeedLimitWalk);
             player.setFlySpeed(crSpeedLimitFly);
             new Thread(() -> {

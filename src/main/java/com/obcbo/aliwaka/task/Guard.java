@@ -13,20 +13,25 @@ import static com.obcbo.aliwaka.file.Message.gcEnd;
 import static com.obcbo.aliwaka.file.Message.gcStart;
 
 public class Guard implements Runnable {
-    public static final Thread guard = new Thread(new Guard(), "Aliwaka-Guard");
+    public static Thread guard = new Thread(new Guard(), "Aliwaka-Guard");
     private static boolean on = true;
     private static int warn = 0;// 危险值
 
     public static void start() {
         if (guard.isAlive()) {
-            Aliwaka.logger.warning("Guard已开启");
+            Aliwaka.logger.warning("Guard is already turned on");
             return;
         }
+        guard = new Thread(new Guard(), "Aliwaka-Guard");
+        on = true;
         guard.start();
     }
 
     public static void stop() {
         on = false;
+        if(guard.isAlive()) {
+            guard.interrupt();
+        }
     }
 
     public static int getWarn() {
@@ -35,15 +40,15 @@ public class Guard implements Runnable {
 
     @Override
     public void run() {
-        Aliwaka.logger.info("Guard开始执行任务");
+        Aliwaka.logger.info("Guard starts to perform tasks");
         while (on) {
             try {
                 core();
             } catch (RuntimeException e) {
-                throw new RuntimeException(e);
+                Aliwaka.logger.warning("Guard OFF");
             }
         }
-        Aliwaka.logger.warning("Guard线程关闭");
+        Aliwaka.logger.warning("Guard OFF");
     }
 
     private void core() {

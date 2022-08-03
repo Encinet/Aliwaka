@@ -7,6 +7,8 @@ import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
 import com.obcbo.aliwaka.task.Guard;
 import com.obcbo.aliwaka.until.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -14,6 +16,7 @@ import java.util.logging.Logger;
 
 import static com.obcbo.aliwaka.file.Config.crEnable;
 import static com.obcbo.aliwaka.file.Config.guardEnable;
+import static com.obcbo.aliwaka.file.Message.reload;
 
 public final class Aliwaka extends JavaPlugin {
     public static final Logger logger = Logger.getLogger("Aliwaka");
@@ -21,7 +24,7 @@ public final class Aliwaka extends JavaPlugin {
     @Override
     public void onEnable() {
         new Metrics(this, 15979);// bstats统计
-        logger.info("MAIN > 开始加载");
+        logger.info("MAIN > Loading");
         saveDefaultConfig();
         saveResource("message.yml", false);// false为不覆盖 true为每次调用都覆盖
         reloadConfig();
@@ -29,12 +32,12 @@ public final class Aliwaka extends JavaPlugin {
         Message.load();
 
         Bukkit.getPluginManager().registerEvents(new CountChunk(), this);
-        logger.info("LISTENER > 监听器注册完毕");
+        logger.info("LISTENER > Registered");
 
         if (Bukkit.getPluginCommand("aliwaka") != null) {
             Objects.requireNonNull(Bukkit.getPluginCommand("aliwaka")).setExecutor(new CommandManage());
         }
-        logger.info("COMMAND > 命令注册完毕");
+        logger.info("COMMAND > Registered");
 
         Bukkit.getScheduler().runTask(this, () -> {
             if (crEnable) {
@@ -47,28 +50,35 @@ public final class Aliwaka extends JavaPlugin {
                 Guard.start();
             }
         });
-        logger.info("TASK > 任务开始加载");
-        logger.info("MAIN > 成功启用插件");
+        logger.info("TASK > Loading");
+        logger.info("MAIN > Plugin enabled successfully");
     }
 
     @Override
     public void onDisable() {
         PointsChecker.stop();
         Guard.stop();
-        logger.info("感谢使用 期待下次相见");
+        logger.info("Thanks for using");
     }
 
-    public static void reload() {
+    public static void reload(CommandSender sender) {
         PointsChecker.stop();
         Guard.stop();
         Config.load();
         Message.load();
-        if (crEnable) {
-            PointsChecker.start();
+        Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Aliwaka.class), () -> {
+            if (crEnable) {
+                PointsChecker.start();
+            }
+        });
+        Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Aliwaka.class), () -> {
+            if (guardEnable) {
+                Guard.start();
+            }
+        });
+        if (sender instanceof Player) {// 如果是玩家执行 在控制台也输出
+            logger.info(reload);
         }
-        if (guardEnable) {
-            Guard.start();
-        }
-        logger.info("重载完成");
+        sender.sendMessage(Message.prefix + reload);
     }
 }

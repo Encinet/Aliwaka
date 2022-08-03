@@ -1,5 +1,5 @@
 # 配置文件版本 非必要不要更改
-version: 2
+version: 3
 # 消息前缀
 prefix: "&8[&6Ali&ewaka&8]&r "
 # 显示颜色
@@ -17,6 +17,8 @@ help:
   - "&6/aw &7reload &f- 重载插件"
   - "&6/aw &7shell &e<command> &f- 模拟终端执行命令"
   - "&f----- &eBy &6ObcbO &f-----"
+# 重新加载
+reload: "重载完成"
 # 无权限
 no-permission: "&c没有权限"
 # 命令执行冷却

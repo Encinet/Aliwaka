@@ -35,7 +35,7 @@ public class CommandManage implements TabExecutor {
             case ("function"):
                 return function.core(sender, args);
             case ("reload"):
-                Aliwaka.reload();
+                Aliwaka.reload(sender);
                 return true;
             default:
                 sender.sendMessage(Message.prefix + wrongCommand);

@@ -29,7 +29,7 @@ AntiCR:
     # 限制情况下的速度
     limit:
       walk: 0.1
-      fly: 0.05
+      fly: 0.02
   num:
     # 执行值
     implement: 1500

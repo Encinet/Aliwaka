@@ -59,7 +59,7 @@ public class Config {
         crSpeedNormalWalk = (float) getConfig().getDouble("AntiCR.speed.normal.walk", 0.2);
         crSpeedNormalFly = (float) getConfig().getDouble("AntiCR.speed.normal.fly", 0.1);
         crSpeedLimitWalk = (float) getConfig().getDouble("AntiCR.speed.limit.walk", 0.1);
-        crSpeedLimitFly = (float) getConfig().getDouble("AntiCR.speed.limit.fly", 0.05);
+        crSpeedLimitFly = (float) getConfig().getDouble("AntiCR.speed.limit.fly", 0.02);
         crImplement = getConfig().getInt("AntiCR.num.implement", 1500);
         crAfterImplement = getConfig().getInt("AntiCR.num.after-implement", 1000);
         crFirstCondition = getConfig().getInt("AntiCR.num.first-condition", 100);
