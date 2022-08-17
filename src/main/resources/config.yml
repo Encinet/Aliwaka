@@ -8,6 +8,8 @@ AntiCR:
   enable: true
   # 检测间隔 单位ms
   check-interval: 10000
+  # 玩家重生后 减少设置值
+  respawn: 200
   # 命令开头为设置值 就减少设置值
   listen-command:
     text:

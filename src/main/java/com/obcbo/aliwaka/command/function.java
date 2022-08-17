@@ -1,8 +1,8 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.file.Message;
-import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
-import com.obcbo.aliwaka.task.Guard;
+import com.obcbo.aliwaka.function.AntiCR.PointsChecker;
+import com.obcbo.aliwaka.function.Guard;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static com.obcbo.aliwaka.file.Config.crEnable;
 import static com.obcbo.aliwaka.file.Message.*;
-import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
+import static com.obcbo.aliwaka.function.AntiCR.CountChunk.playerPoints;
 
 public class function {
     public static boolean core(CommandSender sender, String[] args) {

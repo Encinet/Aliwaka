@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.obcbo'
-version = '1.2.1-SNAPSHOT'
+version = '1.2.2-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -19,7 +19,8 @@ repositories {
 
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
-    // 在下方导包
+    // 在下方引入依赖
+    implementation 'com.cronutils:cron-utils:9.2.0'
 }
 
 def targetJavaVersion = 8

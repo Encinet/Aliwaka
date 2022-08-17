@@ -1,4 +1,4 @@
-package com.obcbo.aliwaka.task;
+package com.obcbo.aliwaka.function;
 
 import com.obcbo.aliwaka.Aliwaka;
 import net.kyori.adventure.text.Component;
@@ -61,6 +61,7 @@ public class Guard implements Runnable {
         if (msptEnable) {
             msptcheck();
         }
+        execute();
         try {
             Thread.sleep(guardCheckInterval);
         } catch (InterruptedException e) {
@@ -68,11 +69,22 @@ public class Guard implements Runnable {
         }
     }
 
+    private void execute() {
+        if (warn >= 20) {
+            gc();
+            if (warn >= 20) {
+                warn = warn - 5;
+            } else {
+                warn = 0;
+            }
+        }
+    }
+
     private void msptcheck() {
         DecimalFormat df = new DecimalFormat("#.00");// 保留小数点后两位
         double mspt = Double.parseDouble(df.format(Bukkit.getTickTimes()[0] / 1000000));
         if (mspt >= msptDangerThreshold) {
-            gc();
+            warn = warn + 7;
         }
     }
 
@@ -80,7 +92,7 @@ public class Guard implements Runnable {
         // 内存百分比
         double ratio = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (double) Runtime.getRuntime().maxMemory() * 100;
         if (ratio >= memPercentage) {
-            gc();
+            warn = warn + 10;
         }
     }
 
@@ -93,14 +105,6 @@ public class Guard implements Runnable {
             warn = warn + (20 - tps);
         } else if (tps > tpsWarnThreshold && warn > 0) {
             warn--;
-        }
-        if (warn >= 10) {
-            gc();
-            if (warn >= 10) {
-                warn = warn - 5;
-            } else {
-                warn = 0;
-            }
         }
     }
 

@@ -1,8 +1,8 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.file.Message;
-import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
-import com.obcbo.aliwaka.task.Guard;
+import com.obcbo.aliwaka.function.AntiCR.PointsChecker;
+import com.obcbo.aliwaka.function.Guard;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 

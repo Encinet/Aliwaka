@@ -15,6 +15,7 @@ public class Config {
     public static int CD;
     public static boolean crEnable;
     public static int crCheckInterval;
+    public static int crRespawn;
     public static int crSpeedInterval;
     public static float crSpeedNormalWalk;
     public static float crSpeedNormalFly;
@@ -53,6 +54,7 @@ public class Config {
         CD = getConfig().getInt("CD", 10000);
         crEnable = getConfig().getBoolean("AntiCR.enable", true);
         crCheckInterval = getConfig().getInt("AntiCR.check-interval", 10000);
+        crRespawn = getConfig().getInt("AntiCR.respawn", 200);
         crListenCommand = getConfig().getStringList("AntiCR.listen-command.text");
         crCommandImplement = getConfig().getInt("AntiCR.listen-command.implement", 200);
         crSpeedInterval = getConfig().getInt("AntiCR.speed.interval", 10000);

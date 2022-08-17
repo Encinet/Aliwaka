@@ -1,0 +1,7 @@
+tasks:
+  restart:
+    enable: true
+    corn: "0 0 12 * * ?"
+    command:
+      - "say Hello"
+      - "time set 1200"

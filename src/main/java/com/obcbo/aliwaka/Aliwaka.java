@@ -2,9 +2,10 @@ package com.obcbo.aliwaka;
 
 import com.obcbo.aliwaka.file.Config;
 import com.obcbo.aliwaka.file.Message;
-import com.obcbo.aliwaka.task.AntiCR.CountChunk;
-import com.obcbo.aliwaka.task.AntiCR.PointsChecker;
-import com.obcbo.aliwaka.task.Guard;
+import com.obcbo.aliwaka.function.AntiCR.CountChunk;
+import com.obcbo.aliwaka.function.AntiCR.PointsChecker;
+import com.obcbo.aliwaka.function.Guard;
+import com.obcbo.aliwaka.function.Tasks;
 import com.obcbo.aliwaka.until.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -27,9 +28,11 @@ public final class Aliwaka extends JavaPlugin {
         logger.info("MAIN > Loading");
         saveDefaultConfig();
         saveResource("message.yml", false);// false为不覆盖 true为每次调用都覆盖
+        saveResource("tasks.yml", false);
         reloadConfig();
         Config.load();
         Message.load();
+        //Tasks.load();
 
         Bukkit.getPluginManager().registerEvents(new CountChunk(), this);
         logger.info("LISTENER > Registered");
@@ -66,6 +69,7 @@ public final class Aliwaka extends JavaPlugin {
         Guard.stop();
         Config.load();
         Message.load();
+        //Tasks.load();
         Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Aliwaka.class), () -> {
             if (crEnable) {
                 PointsChecker.start();

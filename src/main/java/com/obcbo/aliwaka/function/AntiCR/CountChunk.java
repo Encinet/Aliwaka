@@ -1,11 +1,10 @@
-package com.obcbo.aliwaka.task.AntiCR;
+package com.obcbo.aliwaka.function.AntiCR;
 
 import io.papermc.paper.event.packet.PlayerChunkLoadEvent;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,14 +21,24 @@ public class CountChunk implements Listener {
         add(event.getPlayer().getName());
     }
 
+    // 玩家重生事件
+    @EventHandler
+    public void playerRespawnEvent(PlayerRespawnEvent event) {
+        String name = event.getPlayer().getName();
+        int set = playerPoints.get(name) >= crRespawn ?
+                (playerPoints.get(name) - crRespawn) : 0;
+        playerPoints.put(name, set);
+    }
+
     @EventHandler
     public void playerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
         if (!crEnable) return;
+        String name = event.getPlayer().getName();
         for (String n : crListenCommand) {
             if (event.getMessage().startsWith("/" + n)) {
-                int set = playerPoints.get(event.getPlayer().getName()) >= crCommandImplement ?
-                        (playerPoints.get(event.getPlayer().getName()) - crCommandImplement) : 0;
-                playerPoints.put(event.getPlayer().getName(), set);
+                int set = playerPoints.get(name) >= crCommandImplement ?
+                        (playerPoints.get(name) - crCommandImplement) : 0;
+                playerPoints.put(name, set);
             }
         }
     }
@@ -38,9 +47,10 @@ public class CountChunk implements Listener {
     public void playerJoinEvent(PlayerJoinEvent event) {
         if (!crEnable) return;
         // 防止玩家退出无法恢复到正常速度
-        if (!playerPoints.containsKey(event.getPlayer().getName())) {
-            event.getPlayer().setWalkSpeed(crSpeedNormalWalk);
-            event.getPlayer().setFlySpeed(crSpeedNormalFly);
+        Player player = event.getPlayer();
+        if (!playerPoints.containsKey(player.getName())) {
+            player.setWalkSpeed(crSpeedNormalWalk);
+            player.setFlySpeed(crSpeedNormalFly);
         }
     }
 

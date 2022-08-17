@@ -1,18 +1,15 @@
-package com.obcbo.aliwaka.task.AntiCR;
+package com.obcbo.aliwaka.function.AntiCR;
 
 import com.obcbo.aliwaka.Aliwaka;
 import com.obcbo.aliwaka.file.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import static com.obcbo.aliwaka.file.Config.*;
 import static com.obcbo.aliwaka.file.Message.*;
-import static com.obcbo.aliwaka.task.AntiCR.CountChunk.playerPoints;
+import static com.obcbo.aliwaka.function.AntiCR.CountChunk.playerPoints;
 
 public class PointsChecker implements Runnable {
     private static boolean on = true;
@@ -58,7 +55,8 @@ public class PointsChecker implements Runnable {
     }
 
     private void speedControl() {
-        for (Player player : controlList) {
+        Set<Player> set = new HashSet<>(controlList);
+        for (Player player : set) {
             controlList.remove(player);
             player.sendMessage(Message.prefix + crLimit);
             player.setWalkSpeed(crSpeedLimitWalk);
