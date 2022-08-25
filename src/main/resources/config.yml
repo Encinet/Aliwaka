@@ -1,15 +1,26 @@
 # 配置文件版本 非必要不要更改
-version: 3
+version: 5
 # 普通玩家命令CD时间 目前仅用于GC指令 单位ms
 CD: 10000
+# GC显示(值为console game all none) 默认为none
+gc-output: "all"
 # 跑图检测
 AntiCR:
   # 功能开关 true为开
   enable: true
   # 检测间隔 单位ms
   check-interval: 10000
+  # 不检测的世界
+  dont-check-worlds:
+    - "lobby"
+    - "parkour"
+  # 不检测的游戏模式
+  dont-check-gamemodes:
+    - "CREATIVE"
+    - "ADVENTURE"
+    - "SPECTATOR"
   # 玩家重生后 减少设置值
-  respawn: 200
+  respawn: 300
   # 命令开头为设置值 就减少设置值
   listen-command:
     text:
@@ -19,7 +30,7 @@ AntiCR:
       - "back"
       - "warp"
       - "home"
-    implement: 200
+    implement: 300
   # 速度限制
   speed:
     # 限制时间 单位ms

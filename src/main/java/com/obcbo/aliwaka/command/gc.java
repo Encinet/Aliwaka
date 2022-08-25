@@ -2,30 +2,26 @@ package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.file.Config;
 import com.obcbo.aliwaka.file.Message;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
+import com.obcbo.aliwaka.function.Guard;
 import org.bukkit.command.CommandSender;
 
 import static com.obcbo.aliwaka.file.Message.*;
 
 public class gc {
-    static long cooltime = 0; // 冷却起始
+    static long coolTime = 0; // 冷却起始
 
     public static boolean core(CommandSender sender) {
         if (!sender.hasPermission("aliwaka.admin")) {
-            long time = System.currentTimeMillis() - cooltime;
+            long time = System.currentTimeMillis() - coolTime;
             if (time < Config.CD) {
                 sender.sendMessage(Message.prefix + CD);
                 return true;
             } else {
-                cooltime = System.currentTimeMillis();
+                coolTime = System.currentTimeMillis();
             }
         }
-        Bukkit.broadcast(Component.text(gcStart));
-        long before = System.currentTimeMillis();
-        System.gc();
-        long total = System.currentTimeMillis() - before;
-        Bukkit.broadcast(Component.text(gcEnd.replace("%time%", Long.toString(total))));
+        Guard.gc();
+        sender.sendMessage(prefix + "GC执行完毕");
         return true;
     }
 }

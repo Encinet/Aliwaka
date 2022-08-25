@@ -1,7 +1,7 @@
 package com.obcbo.aliwaka.function;
 
 import com.obcbo.aliwaka.Aliwaka;
-import net.kyori.adventure.text.Component;
+import com.obcbo.aliwaka.until.Send;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 
@@ -108,12 +108,12 @@ public class Guard implements Runnable {
         }
     }
 
-    private void gc() {
-        Bukkit.broadcast(Component.text(gcStart));
+    public static void gc() {
+        Send.text(gcOutput, gcStart);
         long before = System.currentTimeMillis();
         System.gc();
         long total = System.currentTimeMillis() - before;
-        Bukkit.broadcast(Component.text(gcEnd.replace("%time%", Long.toString(total))));
+        Send.text(gcOutput, gcEnd.replace("%time%", Long.toString(total)));
     }
 
     private void chunk() {

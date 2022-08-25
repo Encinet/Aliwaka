@@ -15,7 +15,7 @@ import java.util.*;
 import static com.cronutils.model.CronType.QUARTZ;
 
 public class Tasks implements Runnable {
-    public static HashMap<String, List<Object>> tasks = new HashMap<>();
+    public static final HashMap<String, List<Object>> tasks = new HashMap<>();
     private static final CronParser parser = new CronParser(CronDefinitionBuilder.instanceDefinitionFor(QUARTZ));
     private static final Configuration config = YamlConfiguration.loadConfiguration(new File("tasks.yml"));
     public static Thread scheduler = new Thread(new Guard(), "Aliwaka-Scheduler");

@@ -1,6 +1,7 @@
+# 测试功能
 tasks:
   restart:
-    enable: true
+    enable: false
     corn: "0 0 12 * * ?"
     command:
       - "say Hello"

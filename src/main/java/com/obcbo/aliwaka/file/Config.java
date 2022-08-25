@@ -1,20 +1,19 @@
 package com.obcbo.aliwaka.file;
 
-import com.obcbo.aliwaka.Aliwaka;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static com.obcbo.aliwaka.Aliwaka.jp;
 import static com.obcbo.aliwaka.Aliwaka.logger;
 
 public class Config {
-    static final Plugin config = JavaPlugin.getProvidingPlugin(Aliwaka.class);
     public static int CD;
     public static boolean crEnable;
     public static int crCheckInterval;
+    public static List<String> crDontCheckWorlds;
+    public static List<String> crDontCheckGamemodes;
     public static int crRespawn;
     public static int crSpeedInterval;
     public static float crSpeedNormalWalk;
@@ -34,6 +33,7 @@ public class Config {
 
     public static boolean guardEnable;
     public static int guardCheckInterval;
+    public static String gcOutput;
     public static boolean memEnable;
     public static int memPercentage;
     public static boolean tpsEnable;
@@ -43,17 +43,22 @@ public class Config {
     public static int msptDangerThreshold;
 
     public static @NotNull FileConfiguration getConfig() {
-        return config.getConfig();
+        return jp.getConfig();
     }
 
     public static void load() {
-        if (!(getConfig().getInt("version") == 3)) {
+        if (!(getConfig().getInt("version") == 5)) {
             logger.warning("配置文件config.yml是旧版");
         }
 
         CD = getConfig().getInt("CD", 10000);
+        gcOutput = getConfig().getString("gc-output", "all");
+
         crEnable = getConfig().getBoolean("AntiCR.enable", true);
         crCheckInterval = getConfig().getInt("AntiCR.check-interval", 10000);
+        crDontCheckWorlds = getConfig().getStringList("AntiCR.dont-check-worlds");
+        crDontCheckGamemodes = getConfig().getStringList("AntiCR.dont-check-gamemodes");
+
         crRespawn = getConfig().getInt("AntiCR.respawn", 200);
         crListenCommand = getConfig().getStringList("AntiCR.listen-command.text");
         crCommandImplement = getConfig().getInt("AntiCR.listen-command.implement", 200);

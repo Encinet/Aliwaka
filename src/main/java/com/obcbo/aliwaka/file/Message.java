@@ -1,20 +1,19 @@
 package com.obcbo.aliwaka.file;
 
-import com.obcbo.aliwaka.Aliwaka;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.obcbo.aliwaka.Aliwaka.jp;
 import static com.obcbo.aliwaka.Aliwaka.logger;
 
 public class Message {
-    static FileConfiguration message = YamlConfiguration.loadConfiguration(
-            new File(JavaPlugin.getProvidingPlugin(Aliwaka.class).getDataFolder(), "message.yml"));
+    public static FileConfiguration message = YamlConfiguration.loadConfiguration(
+            new File(jp.getDataFolder(), "message.yml"));
 
     public static String prefix;
     public static String colorNormal;
