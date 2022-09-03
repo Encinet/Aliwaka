@@ -1,3 +1,5 @@
+# 配置文件版本 非必要不要更改
+version: 3
 # 消息前缀
 prefix: "&8[&6Ali&ewaka&8]&r "
 # 显示颜色
@@ -15,10 +17,18 @@ help:
   - "&6/aw &7reload &f- 重载插件"
   - "&6/aw &7shell &e<command> &f- 模拟终端执行命令"
   - "&f----- &eBy &6ObcbO &f-----"
+# 重新加载
+reload: "重载完成"
 # 无权限
 no-permission: "&c没有权限"
 # 命令执行冷却
 CD: "冷却中"
+# 命令执行不完整
+not-complete: "你似乎还没有输入完命令"
+# 错误的命令
+wrong-command: "错误的命令"
+# 关闭的功能
+function-disable: "此功能处于关闭状态"
 # 垃圾回收
 GC:
   start: "服务器开始强制回收内存,可能会有短暂卡顿"
@@ -26,6 +36,7 @@ GC:
   end: "服务器内存回收完成 耗时%time%ms"
 # 限制跑图
 AntiCR:
+  output: "输出区块加载计数中(仅在线)"
   limit: "暂时限制速度"
   limit-lifted: "恢复速度"
   title: "&6旅行者 停下来休息一会吧"

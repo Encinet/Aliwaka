@@ -1,0 +1,8 @@
+# 测试功能
+tasks:
+  restart:
+    enable: false
+    corn: "0 0 12 * * ?"
+    command:
+      - "say Hello"
+      - "time set 1200"

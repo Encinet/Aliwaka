@@ -3,7 +3,7 @@ version: '${version}'
 main: com.obcbo.aliwaka.Aliwaka
 api-version: 1.16
 authors: [ ObcbO ]
-description: Mik automatic management robot
+description: Automatic management plugin
 website: https://github.com/Encinet/Aliwaka
 #此为非必须依赖
 #softdepend:
