@@ -3,6 +3,8 @@ package com.obcbo.aliwaka.command;
 import com.obcbo.aliwaka.file.Config;
 import com.obcbo.aliwaka.file.Message;
 import com.obcbo.aliwaka.function.Guard;
+import com.obcbo.aliwaka.until.Permissions;
+
 import org.bukkit.command.CommandSender;
 
 import static com.obcbo.aliwaka.file.Message.*;
@@ -11,7 +13,7 @@ public class gc {
     static long coolTime = 0; // 冷却起始
 
     public static boolean core(CommandSender sender) {
-        if (!sender.hasPermission("aliwaka.admin")) {
+        if (!Permissions.check(sender, "aliwaka.admin")) {
             long time = System.currentTimeMillis() - coolTime;
             if (time < Config.CD) {
                 sender.sendMessage(Message.prefix + CD);

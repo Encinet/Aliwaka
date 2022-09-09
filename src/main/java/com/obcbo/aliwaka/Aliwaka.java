@@ -36,7 +36,7 @@ public final class Aliwaka extends JavaPlugin {
         reloadConfig();
         Config.load();
         Message.load();
-        //Tasks.load();
+        // Tasks.load();
 
         Bukkit.getPluginManager().registerEvents(new CountChunk(), this);
         logger.info("LISTENER > Registered");
@@ -51,7 +51,7 @@ public final class Aliwaka extends JavaPlugin {
                 PointsChecker.start();
             }
         });
-        //Bukkit.getScheduler().runTask(this, Guard::start);
+        // Bukkit.getScheduler().runTask(this, Guard::start);
         Bukkit.getScheduler().runTask(this, () -> {
             if (guardEnable) {
                 Guard.start();
@@ -81,17 +81,17 @@ public final class Aliwaka extends JavaPlugin {
         Config.load();
         Message.load();
 
-        //Tasks.load();
-        Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Aliwaka.class), () -> {
-            if (crEnable) {
+        // Tasks.load();
+        if (crEnable) {
+            Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Aliwaka.class), () -> {
                 PointsChecker.start();
-            }
-        });
-        Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Aliwaka.class), () -> {
-            if (guardEnable) {
+            });
+        }
+        if (guardEnable) {
+            Bukkit.getScheduler().runTask(JavaPlugin.getPlugin(Aliwaka.class), () -> {
                 Guard.start();
-            }
-        });
+            });
+        }
         if (sender instanceof Player) {// 如果是玩家执行 在控制台也输出
             logger.info(reload);
         }

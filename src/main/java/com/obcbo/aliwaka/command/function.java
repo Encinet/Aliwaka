@@ -2,6 +2,7 @@ package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.file.Message;
 import com.obcbo.aliwaka.function.AntiCR.PointsChecker;
+import com.obcbo.aliwaka.until.Permissions;
 import com.obcbo.aliwaka.function.Guard;
 import org.bukkit.command.CommandSender;
 
@@ -15,7 +16,7 @@ import static com.obcbo.aliwaka.function.AntiCR.CountChunk.playerPoints;
 
 public class function {
     public static boolean core(CommandSender sender, String[] args) {
-        if (!sender.hasPermission("aliwaka.admin")) {
+        if (!Permissions.check(sender, "aliwaka.admin")) {
             sender.sendMessage(Message.prefix + noPermission);
             return true;
         } else if (args.length < 3) {
@@ -45,7 +46,7 @@ public class function {
 
                     sender.sendMessage(Message.prefix + crOutput);
 
-                    List<Map.Entry<String, Integer>> list = new ArrayList<>(playerPoints.entrySet()); //转换为list
+                    List<Map.Entry<String, Integer>> list = new ArrayList<>(playerPoints.entrySet()); // 转换为list
                     list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
                     int num = 1;

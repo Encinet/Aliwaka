@@ -1,6 +1,8 @@
 package com.obcbo.aliwaka.command;
 
 import com.obcbo.aliwaka.file.Message;
+import com.obcbo.aliwaka.until.Permissions;
+
 import org.bukkit.command.CommandSender;
 
 import java.io.BufferedReader;
@@ -13,7 +15,7 @@ public class shell implements Runnable {
     public static CommandSender sender;
 
     public static boolean core(CommandSender sender, String[] args) {
-        if (sender.hasPermission("aliwaka.admin")) {
+        if (Permissions.check(sender, "aliwaka.admin")) {
             String text = String.join(" ", args);
             if (text.length() < 7) {
                 sender.sendMessage(Message.prefix + notComplete);
